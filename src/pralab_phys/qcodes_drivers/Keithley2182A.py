@@ -66,7 +66,7 @@ class Keithley2182A(VisaInstrument):
         self.filter: Parameter = self.add_parameter(
             "filter",
             get_cmd=":SENS:VOLT:DFILter:STAT?",
-            set_cmd=":SENS:VOLT:DFILter:STAT? {}"
+            set_cmd=":SENS:VOLT:DFILter:STAT {}"
         )
 
         self.amplitude: Parameter = self.add_parameter(

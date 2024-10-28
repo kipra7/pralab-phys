@@ -1,5 +1,8 @@
 # gitignore
 
+# IgnoreQDInstrument
+QDInstrument.dll
+
 # /exps
 exps/
 test_code.py
