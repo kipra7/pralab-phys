@@ -1,5 +1,7 @@
 # gitignore
 
+# /exps
+exps/
 test_code.py
 
 # markdown editor & mac
