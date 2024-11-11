@@ -19,10 +19,17 @@ from qcodes.parameters import Parameter
 from qcodes.validators import Enum, Ints, MultiType, Numbers
 
 class Keithley2182A(VisaInstrument):
-    """
-    QCoDes driver for the Keithley 2182A Nanovoltmeter.
-    """
+    """Instrument Driver for Keithley2182A (1 channel, Voltage only)
 
+    Attributes:
+        nplc (Parameter): Set or get the number of power line cycles (min=0.01, max=50)
+        auto_range (Parameter): Set or get the measurement range automatically (1: ON, 0: OFF)
+        rel (Parameter): Enables or disables the application of
+                         a relative offset value to the measurement. (1: ON, 0: OFF)
+        active (Parameter): Set or get the active function. (VOLT or TEMP)
+        filter (Parameter): Enables or disables the digital filter for measurements.
+        amplitude (Parameter): Get the voltage (unit: V)
+    """
     def __init__(
         self,
         name: str,
@@ -30,6 +37,9 @@ class Keithley2182A(VisaInstrument):
         reset: bool = False,
         **kwargs: "Unpack[VisaInstrumentKWArgs]",
     ):
+
+        """initial
+        """
         super().__init__(name, address, **kwargs)
 
         self._trigger_sent = False

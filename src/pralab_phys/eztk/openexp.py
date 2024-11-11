@@ -5,6 +5,14 @@ from typing import Union
 
 
 def openpath(multichoice:bool = False) -> Union[str, tuple[str, ...]]:
+    """It returns path(s) of (a) file(s) that you select on filedialog.
+
+    Args:
+        multichoice (bool, optional): Selecting multiple files. Defaults to False.
+
+    Returns:
+        Union[str, tuple[str, ...]]: file path(s)
+    """
     root = tk.Tk()
     root.withdraw()
     # ファイルダイアログを開いてファイルを選択
@@ -16,7 +24,13 @@ def openpath(multichoice:bool = False) -> Union[str, tuple[str, ...]]:
     root.destroy()
     return path
 
+
 def opendir() -> str:
+    """It returns a directory path that you select on filedialog.
+
+    Returns:
+        str: a directory path
+    """
     root = tk.Tk()
     root.withdraw()
     # ディレクトリ選択ダイアログを開く
