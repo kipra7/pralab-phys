@@ -1,5 +1,11 @@
 # gitignore
 
+# IgnoreQDInstrument
+QDInstrument.dll
+
+# /exps
+exps/
+tutorials/
 test_code.py
 
 # markdown editor & mac

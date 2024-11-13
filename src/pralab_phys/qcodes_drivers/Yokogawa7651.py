@@ -12,14 +12,22 @@ import logging
 log = logging.getLogger(__name__)
 
 
-class Yokogawa7651(VisaInstrument): 
-	"""
-	QCoDeS driver for the Yokogawa 7651 I/V source
-	"""
-	
-	# all instrument constructors should accept **kwargs and pass them on to
-	# super().__init__
+class Yokogawa7651(VisaInstrument):
+	"""  
+    QCoDeS driver for the Yokogawa 7651 I/V source.  
 
+    Args:  
+        VisaInstrument (_type_): _description_  
+
+    Attributes:  
+        voltage_range (Parameter): Set output voltage range in mV.  
+        current_range (Parameter): Set output current range in mA.  
+        voltage_limit (Parameter): Set output voltage limit in mV.  
+        current_limit (Parameter): Set output current limit in mA.  
+        voltage (Parameter): Set output voltage in mV.  
+        current (Parameter): Set output current in mA.  
+        status (Parameter): Output on/off. ("on", "off")
+    """  
 	def __init__(self, name, address, **kwargs):
 		# supplying the terminator means you don't need to remove it from every response
 		super().__init__(name, address, terminator='\n', **kwargs)
@@ -71,11 +79,7 @@ class Yokogawa7651(VisaInstrument):
 							set_cmd='O' + '{}' + 'E',
 							set_parser =self._easy_read_status
 							)
-
-
-
 	def _set_V_mode(self,range):
-
 		range_options = {10:"R2", 100:"R3", 1000:"R4", 10000:"R5", 30000:"R6" }
 		self.write('F1'+range_options[int(range)]+'E')
 

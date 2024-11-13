@@ -6,6 +6,7 @@ class EZGraph(go.Figure):
         super().__init__()
 
         self.update_layout(width=width, height=height)
+        
 
 
     def add_plot():
