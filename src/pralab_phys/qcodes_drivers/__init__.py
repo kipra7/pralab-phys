@@ -1,6 +1,6 @@
 # pralab_phys.qcodes_drivers
-"""
-from .Yokogawa7651 import Yokogawa7651
-from .Keithley2182A import Keithley2182A
-from .QDdotNET import PPMS
-"""
+
+from .yokogawa7651 import Yokogawa7651
+from .keithley2182a import Keithley2182A
+from .QDdotNET import PPMSdotNET
+from .timer import Timer

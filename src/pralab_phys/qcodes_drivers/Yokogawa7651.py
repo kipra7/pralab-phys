@@ -79,6 +79,7 @@ class Yokogawa7651(VisaInstrument):
 							set_cmd='O' + '{}' + 'E',
 							set_parser =self._easy_read_status
 							)
+	
 	def _set_V_mode(self,range):
 		range_options = {10:"R2", 100:"R3", 1000:"R4", 10000:"R5", 30000:"R6" }
 		self.write('F1'+range_options[int(range)]+'E')
