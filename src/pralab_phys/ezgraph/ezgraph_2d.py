@@ -4,23 +4,24 @@ class EZGraph(go.Figure):
 
     def __init__(
         self, 
-        name:str = "",
+        dispname:str = "",
         xax_title:str = "",
         yax_title:str = "",
         width:int = 900, 
         height:int = 600,
         namedisplay:bool = True,
     ):
-        self.name = name
-        self.dispname = name
-
-        if not namedisplay:
-            self.dispname = ""
-        
         super().__init__()
 
+        # plotly側の設定により、最初にアンダーバーを入れないとエラーを吐く
+        # 修正を要検討
+        self._dispname = dispname
+
+        if not namedisplay:
+            self._dispname = ""
+
         self.update_layout(
-            title = dict(text = "<b>" + self.dispname, font = dict(size=22, color='gray'), y = 0.95),
+            title = dict(text = "<b>" + self._dispname, font = dict(size=22, color='gray'), y = 0.95),
             legend=dict(xanchor='left', yanchor='bottom', x=0.02, y=0.82),
             width=width, 
             height=height,
@@ -47,7 +48,7 @@ class EZGraph(go.Figure):
             tickwidth=2,
             tickcolor='grey'
             )
-
+    
     def add_graph(self, xdata, ydata, name = "", mode = "lines+markers", color = None):
         self.add_trace(
             go.Scatter(x=xdata, y=ydata, mode=mode, name=name, 
