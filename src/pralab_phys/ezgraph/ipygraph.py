@@ -2,7 +2,7 @@
 import pandas as pd
 from ipywidgets import interact, Select
 
-from ezgraph_2d import EZGraph
+from .ezgraph_2d import EZGraph
 
 class EZGraphDisplay:
 
