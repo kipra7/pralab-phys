@@ -9,4 +9,4 @@ Especially, it includes following QCoDes Instrument Drivers
 - Quantum Design PPMS (using GPIB connection)
 
 ### Attension: 
-For versions below 0.2.0, we strongly discourage usage due to instability in versioning and other concerns.
+For versions below 0.2.0, we **strongly discourage usage** due to instability in versioning and other concerns.
