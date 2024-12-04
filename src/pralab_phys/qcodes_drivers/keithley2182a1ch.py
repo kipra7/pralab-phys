@@ -1,28 +1,20 @@
 # most of the drivers only need a couple of these... moved all up here for clarity below
-import sys
-import time
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing_extensions import (
         Unpack,  # can be imported from typing if python >= 3.12
     )
 
-import numpy as np
-
 from qcodes import validators as vals
 from qcodes.instrument import (
-    Instrument,
-    InstrumentBaseKWArgs,
-    InstrumentChannel,
     VisaInstrument,
     VisaInstrumentKWArgs,
 )
-from qcodes.instrument_drivers.AlazarTech.utils import TraceParameter
-from qcodes.parameters import ManualParameter, MultiParameter, Parameter
+from qcodes.parameters import Parameter
 from qcodes.validators import Enum, Numbers
 
-class Keithley2182A(VisaInstrument):
+class Keithley2182A1ch(VisaInstrument):
     """Instrument Driver for Keithley2182A (1 channel, Voltage only)
 
     Attributes:
@@ -91,7 +83,3 @@ class Keithley2182A(VisaInstrument):
         )
 
         self.get = self.amplitude
-
-        
-
-
