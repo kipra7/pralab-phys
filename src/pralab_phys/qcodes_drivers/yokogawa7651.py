@@ -40,7 +40,7 @@ class Yokogawa7651(VisaInstrument):
 			label = 'Set the output voltage range in mV',
 			vals = vals.Enum(10, 100, 1000, 10000, 30000),
 			unit   = 'mV',
-			set_cmd = partial(self._set_range(), mode = "VOLT")
+			set_cmd = partial(self._set_range, mode = "VOLT")
 			)
 
 		self.current_range: Parameter = self.add_parameter(
@@ -48,7 +48,7 @@ class Yokogawa7651(VisaInstrument):
 			label = 'Set output current range in mA',
 			vals = vals.Enum(1,10,100),
 			unit   = 'mA',
-			set_cmd = partial(self._set_range(), mode = "CURR")
+			set_cmd = partial(self._set_range, mode = "CURR")
 			)
 
 		self.voltage_limit: Parameter = self.add_parameter(
