@@ -2,11 +2,11 @@
 
 # Last updated on 30 Oct 2020
 #                     -- Arpit
-
-
-import qcodes as qc
+from functools import partial
 from qcodes import (VisaInstrument,
 					validators as vals)
+from qcodes.parameters import Parameter
+
 import logging
 
 log = logging.getLogger(__name__)
@@ -35,31 +35,38 @@ class Yokogawa7651(VisaInstrument):
 		# init: crashes the I/O, clear from visa test panel fixes the issue
 		# self.write('RC')
 
-		self.add_parameter( name = 'voltage_range',  
-							label = 'Set output voltage range in mV',
-							vals = vals.Enum(10,100,1_000,10_000,30_000),
-							unit   = 'mV',
-							set_cmd = self._set_V_mode)
+		self.voltage_range: Parameter = self.add_parameter(
+			name = 'voltage_range',  
+			label = 'Set the output voltage range in mV',
+			vals = vals.Enum(10, 100, 1000, 10000, 30000),
+			unit   = 'mV',
+			set_cmd = partial(self._set_range(), mode = "VOLT")
+			)
 
-		self.add_parameter( name = 'current_range',  
-							label = 'Set output current range in mA',
-							vals = vals.Enum(1,10,100),
-							unit   = 'mA',
-							set_cmd = self._set_A_mode)
+		self.current_range: Parameter = self.add_parameter(
+			name = 'current_range',  
+			label = 'Set output current range in mA',
+			vals = vals.Enum(1,10,100),
+			unit   = 'mA',
+			set_cmd = partial(self._set_range(), mode = "CURR")
+			)
 
-		self.add_parameter( name = 'voltage_limit',  
-							label = 'Set output voltage limit in mV',
-							vals = vals.Numbers(1000,30_000),
-							unit   = 'mV',
-							set_parser = self._div_1000_int,
-							set_cmd = 'LV'+'{}')
+		self.voltage_limit: Parameter = self.add_parameter(
+			name = 'voltage_limit',  
+			label = 'Set output voltage limit in mV',
+			vals = vals.Numbers(1000,30_000),
+			unit   = 'mV',
+			set_parser = self._div_1000_int,
+			set_cmd = 'LV'+'{}'
+			)
 
-		self.add_parameter( name = 'current_limit',  
-							label = 'Set output current limit in mA',
-							vals = vals.Numbers(5,120),
-							unit   = 'mA',
-							set_parser = int,
-							set_cmd = 'LA'+'{}')
+		self.current_limit: Parameter = self.add_parameter(
+			name = 'current_limit',
+			label = 'Set output current limit in mA',
+			vals = vals.Numbers(5,120),
+			unit   = 'mA',
+			set_parser = int,
+			set_cmd = 'LA'+'{}')
 
 		self.add_parameter( name = 'voltage',  
 							label = 'Set output voltage in mV',
@@ -80,17 +87,58 @@ class Yokogawa7651(VisaInstrument):
 							set_parser =self._easy_read_status
 							)
 	
-	def _set_V_mode(self,range):
-		range_options = {10:"R2", 100:"R3", 1000:"R4", 10000:"R5", 30000:"R6" }
-		self.write('F1'+range_options[int(range)]+'E')
+	def _set_range(self, range:int, mode:str) -> None:
+		if mode == "CURR":
+			range_options = {1:"R4", 10:"R5", 100:"R6" }
+			self.write('F5'+range_options[int(range)]+'E')
+		elif mode == "VOLT":
+			range_options = {10:"R2", 100:"R3", 1000:"R4", 10000:"R5", 30000:"R6" }
+			self.write('F1'+range_options[int(range)]+'E')
 
-	def _set_A_mode(self,range):
+	def _get_mode(self, status:str) -> str:
+		if "F1R" in status:
+			return "VOLT"
+		elif "F5R" in status:
+			return "CURR"
+	def _get_range(self, status:str) -> int:
+		if "F1R" in status:
+			if "R2" in status:
+				return 10
+			elif "R3" in status:
+				return 100
+			elif "R4" in status:
+				return 1000
+			elif "R5" in status:
+				return 10000
+			elif "R6" in status:
+				return 30000
+		elif "F5R" in status:
+			if "R4" in status:
+				return 1
+			elif "R5" in status:
+				return 10
+			elif "R6" in status:
+				return 100
 
-		range_options = {1:"R4", 10:"R5", 100:"R6"}
-		self.write('F5'+range_options[int(range)]+'E')
+	def _volt_limit(self, status:str) -> int:
+		if "LV" in status:
+			return int(status[2:])
+
+	def _curr_limit(self, status:str) -> int:
+		if "LA" in status:
+			return int(status[status.index("LA")+2:])
+
+	def _get_status(self) -> None:
+		status = self.ask('OS')
+		slist = status.split()
+		self.statusmap = {
+			'mode': self._get_mode(slist[1]),
+			'range': self._get_range(slist[1]),
+			'voltage_limit': self._volt_limit(slist[3]),
+			'current_limit': self._curr_limit(slist[3]),
+			}
 
 	def _div_1000_int(self,val):
-
 		return int(val/1000)
 
 	def _set_V(self,voltage):
@@ -117,15 +165,10 @@ class Yokogawa7651(VisaInstrument):
 			ret = '0'
 		return ret
 
-	def init(self):
+	def initialize(self):
 
 		self.write('RC')
 
-
-
-
-
 	# To avoid identity query error
 	def get_idn(self):
-
-		return {'vendor': 'Yokogawa', 'model': '7651','serial': '0', 'firmware': None}
+		return self.ask('OS')
