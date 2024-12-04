@@ -8,19 +8,44 @@ if TYPE_CHECKING:
         Unpack,  # can be imported from typing if python >= 3.12
     )
 
-import numpy as np
-
 from qcodes import validators as vals
 from qcodes.instrument import (
-    Instrument,
-    InstrumentBaseKWArgs,
     InstrumentChannel,
     VisaInstrument,
     VisaInstrumentKWArgs,
 )
-from qcodes.instrument_drivers.AlazarTech.utils import TraceParameter
-from qcodes.parameters import ManualParameter, MultiParameter, Parameter
+from qcodes.parameters import Parameter
 from qcodes.validators import Enum, Numbers
+
+
+class Keithley2182Achannel(InstrumentChannel):
+
+    """A single channel of the Keithley2182A"""
+    def __init__(
+        self,
+        parent: Instrument,
+        name: str,
+        channel: str,
+        **kwargs: "Unpack[InstrumentBaseKWArgs]",
+    ) -> None:
+
+        """
+        Args:
+            parent: The Instrument instance to which the channel is
+                to be attached.
+            name: The 'colloquial' name of the channel
+            channel: The name used by the Keithley, i.e. either
+                'smua' or 'smub'
+            **kwargs: Forwarded to base class.
+        """
+
+        super().__init__(parent, name, **kwargs)
+        self.model = self._parent.model
+
+
+
+
+
 
 class Keithley2182A(VisaInstrument):
     """Instrument Driver for Keithley2182A (1 channel, Voltage only)
