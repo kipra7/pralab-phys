@@ -41,8 +41,8 @@ class Timer(Instrument):
     def initialize():
         self.initialtime = time.time()
 
-    def get_time:
-        return 
+    def get_time():
+        pass
 
 
 
