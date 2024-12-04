@@ -1,4 +1,4 @@
-# pralab-phys 0.2.1a
+# pralab-phys 0.2.1a1
 
 Pralab-phys provides some extensions of QCoDes (python-based data acquisition framework) and Plotly and more.
 
