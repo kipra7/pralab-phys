@@ -26,7 +26,7 @@ class Yokogawa7651(VisaInstrument):
         current_limit (Parameter): Set output current limit in mA.  
         voltage (Parameter): Set output voltage in mV.  
         current (Parameter): Set output current in mA.  
-        status (Parameter): Output on/off. ("on", "off")
+        output (Parameter): Output Status. ("on", "off")
     """  
 	def __init__(self, name, address, **kwargs):
 		# supplying the terminator means you don't need to remove it from every response
@@ -34,6 +34,34 @@ class Yokogawa7651(VisaInstrument):
 
 		# init: crashes the I/O, clear from visa test panel fixes the issue
 		# self.write('RC')
+
+		self._status = {
+			'mode': 'Voltage',
+			'voltage_limit': None,
+			'current_limit': None,
+			'current': 0,
+			'voltage': 0
+			}
+
+		self.current: Parameter = self.add_parameter(
+            name="current",
+            parameter_class=Current,
+            label="current",
+            unit="mA",
+        )
+
+		self.voltage: Parameter = self.add_parameter(
+			name="voltage",
+			parameter_class=Voltage,
+			label="voltage",
+			unit="mV",
+		)
+
+		self.mode: Parameter = self.add_parameter(
+			name="mode",
+			parameter_class=Mode,
+			label="mode",
+		)
 
 		self.voltage_range: Parameter = self.add_parameter(
 			name = 'voltage_range',  
@@ -68,24 +96,18 @@ class Yokogawa7651(VisaInstrument):
 			set_parser = int,
 			set_cmd = 'LA'+'{}')
 
-		self.add_parameter( name = 'voltage',  
-							label = 'Set output voltage in mV',
-							vals = vals.Numbers(-30_000,30_000),
-							unit   = 'mV',
-							set_cmd = self._set_V)
-
-		self.add_parameter( name = 'current',  
-							label = 'Set output current in mA',
-							vals = vals.Numbers(-120,120),
-							unit   = 'mA',
-							set_cmd = self._set_A)
-
-		self.add_parameter( name = 'status',  
-							label = 'Output on/off',
-							vals = vals.Enum('on','off'),
-							set_cmd='O' + '{}' + 'E',
-							set_parser =self._easy_read_status
-							)
+		self.output = self.add_parameter(
+			name = 'output',  
+			label = 'Output State',
+			set_cmd=lambda x: self.on() if x else self.off(),
+			val_mapping={"off": 0, "on": 1,},
+			)
+	
+	def on(self):
+		self.write('O1E')
+	
+	def off(self):
+		self.write('O0E')
 	
 	def _set_range(self, range:int, mode:str) -> None:
 		if mode == "CURR":
@@ -142,33 +164,77 @@ class Yokogawa7651(VisaInstrument):
 		return int(val/1000)
 
 	def _set_V(self,voltage):
-
+		self._status['mode'] = 'Voltage'
+		self._status['voltage'] = voltage
 		if voltage>0:
 			polarity = '+'
 		else:
 			polarity = '-'
-		self.write('S'+polarity+str(round(abs(voltage)/1000.,6))+'E')
+		self.write('F1SA'+polarity+str(round(abs(voltage)/1000.,6))+'E')
 
 	def _set_A(self,current):
-
+		self._status['mode'] = 'Current'
+		self._status['current'] = current
 		if current>0:
 			polarity = '+'
 		else:
 			polarity = '-'
-		self.write('S'+polarity+str(round(abs(current)/1000.,6))+'E')
-
-	def _easy_read_status(self,state):
-
-		if state == 'on':
-			ret = '1'
-		else:
-			ret = '0'
-		return ret
+		self.write('F5SA'+polarity+str(round(abs(current)/1000.,6))+'E')
 
 	def initialize(self):
-
 		self.write('RC')
 
 	# To avoid identity query error
 	def get_idn(self):
 		return self.ask('OS')
+
+
+class Current(Parameter):
+	def __init__(
+        self,
+        name: str,
+        instrument: Yokogawa7651,
+        **kwargs,) -> None:
+		
+		super().__init__(name, instrument=instrument, **kwargs)
+
+	def get_raw(self):
+		return self.instrument._status["current"]
+
+	def set_raw(self, value):
+		self.instrument.set_A(value)
+
+
+class Voltage(Parameter):
+	def __init__(
+		self,
+		name: str,
+		instrument: Yokogawa7651,
+		**kwargs,) -> None:
+		
+		super().__init__(name, instrument=instrument, **kwargs)
+
+	def get_raw(self):
+		return self.instrument._status["voltage"]
+
+	def set_raw(self, value):
+		self.instrument.set_V(value)
+
+
+class Mode(Parameter):
+	def __init__(
+		self,
+		name: str,
+		instrument: Yokogawa7651,
+		**kwargs,) -> None:
+		
+		super().__init__(name, instrument=instrument, **kwargs)
+
+	def get_raw(self):
+		return self.instrument._status["mode"]
+
+	def set_raw(self, value):
+		if value == "Voltage":
+			self.instrument.write('F1E')
+		elif value == "Current":
+			self.instrument.write('F5E')
