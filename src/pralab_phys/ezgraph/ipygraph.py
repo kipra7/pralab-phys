@@ -7,7 +7,7 @@ from .ezgraph_2d import EZGraph
 class EZGraphDisplay:
 
     def _gen_graph(self, x_axis, y_axis):
-        graph = EZGraph(xax_title = self.x_axis, yax_title= self.y_axis, namedisplay=False)
+        graph = EZGraph(xax_title = self.x_axis.value, yax_title= self.y_axis.value, namedisplay=False)
         graph.add_graph(self.df[x_axis], self.df[y_axis])
         graph.show()
 
