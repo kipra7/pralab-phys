@@ -39,8 +39,15 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.html">pralab_phys package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.analysis.html">pralab_phys.analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.ezgraph.html">pralab_phys.ezgraph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.eztools.html">pralab_phys.eztools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.qcodes_drivers.html">pralab_phys.qcodes_drivers package</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -68,16 +75,18 @@
   <h1>Source code for pralab_phys.ezgraph.ipygraph</h1><div class="highlight"><pre>
 <span></span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">Select</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">Select</span><span class="p">,</span> <span class="n">IntSlider</span>
 
 <span class="kn">from</span> <span class="nn">.ezgraph_2d</span> <span class="kn">import</span> <span class="n">EZGraph</span>
 
 <div class="viewcode-block" id="EZGraphDisplay">
 <a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ipygraph.EZGraphDisplay">[docs]</a>
 <span class="k">class</span> <span class="nc">EZGraphDisplay</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DataFrameを受け取り、2次元グラフを描画するためのクラス</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_gen_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">):</span>
-        <span class="n">graph</span> <span class="o">=</span> <span class="n">EZGraph</span><span class="p">(</span><span class="n">xax_title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">yax_title</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">namedisplay</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">EZGraph</span><span class="p">(</span><span class="n">xax_title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">yax_title</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_axis</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">namedisplay</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">graph</span><span class="o">.</span><span class="n">add_graph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">x_axis</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">y_axis</span><span class="p">])</span>
         <span class="n">graph</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -85,7 +94,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x_axis</span> <span class="o">=</span> <span class="n">Select</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;X軸&#39;</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y_axis</span> <span class="o">=</span> <span class="n">Select</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Y軸&#39;</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
-        <span class="n">interact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gen_graph</span><span class="p">,</span> <span class="n">x_axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_axis</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Width&#39;</span><span class="p">)</span>
+        <span class="n">interact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gen_graph</span><span class="p">,</span> <span class="n">x_axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span></div>
 
 </pre></div>
 

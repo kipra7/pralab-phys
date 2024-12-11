@@ -1,6 +1,16 @@
 import plotly.graph_objects as go
 
 class EZGraph(go.Figure):
+    '''2次元グラフを描画するためのクラス
+
+    Args:
+        dispname (str): グラフの表示名
+        xax_title (str): x軸のタイトル
+        yax_title (str): y軸のタイトル
+        width (int): グラフの幅
+        height (int): グラフの高さ
+        namedisplay (bool): グラフの表示名を表示するかどうか
+    '''
 
     def __init__(
         self, 
@@ -50,19 +60,71 @@ class EZGraph(go.Figure):
             )
     
     def add_graph(self, xdata, ydata, name = "", mode = "lines+markers", color = None):
+        """グラフを追加する
+
+        Args:
+            xdata (): _description_
+            ydata (_type_): _description_
+            name (str, optional): _description_. Defaults to "".
+            mode (str, optional): _description_. Defaults to "lines+markers".
+            color (_type_, optional): _description_. Defaults to None.
+        """
         self.add_trace(
             go.Scatter(x=xdata, y=ydata, mode=mode, name=name, 
-                marker=dict(size=5, color=color), line=dict(width=3, color=color)
+                marker=dict(size=7, color=color), line=dict(width=3.5, color=color)
+                )
+            )
+
+
+    def add_markers(self, x, y, name = "", color = None, size = 7):
+        """マーカーを追加する
+
+        Args:
+            x (_type_): _description_
+            y (_type_): _description_
+            name (str, optional): _description_. Defaults to "".
+            color (_type_, optional): _description_. Defaults to None.
+            size (int, optional): _description_. Defaults to 7.
+        """
+        self.add_trace(
+            go.Scatter(x=[x], y=[y], mode="markers", name=name, 
+                marker=dict(size=size, color=color)
+                )
+            )
+        
+    def add_line(self, x, y, name = "", color = None, width = 3.5):
+        """線を追加する
+
+        Args:
+            x (_type_): _description_
+            y (_type_): _description_
+            name (str, optional): _description_. Defaults to "".
+            color (_type_, optional): _description_. Defaults to None.
+            width (float, optional): _description_. Defaults to 3.5.
+        """
+        self.add_trace(
+            go.Scatter(x=x, y=y, mode="lines", name=name, 
+                line=dict(width=width, color=color)
                 )
             )
 
     def logx(self):
+        """x軸を対数軸にする
+        """
         self.update_xaxes(type="log")
     
     def logy(self): 
+        """y軸を対数軸にする
+        """
         self.update_yaxes(type="log")
 
     def legand_loc(self, x = 1.02, y = 1):
+        """凡例の位置を設定する
+
+        Args:
+            x (float, optional): . Defaults to 1.02.
+            y (int, optional): _description_. Defaults to 1.
+        """
         self.update_layout(legend=dict(x=x, y=y))
 
     def title_loc(self, y:float = 0.95):

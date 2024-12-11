@@ -39,8 +39,15 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.html">pralab_phys package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.analysis.html">pralab_phys.analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.ezgraph.html">pralab_phys.ezgraph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.eztools.html">pralab_phys.eztools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.qcodes_drivers.html">pralab_phys.qcodes_drivers package</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -71,6 +78,16 @@
 <div class="viewcode-block" id="EZGraph">
 <a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph">[docs]</a>
 <span class="k">class</span> <span class="nc">EZGraph</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;2次元グラフを描画するためのクラス</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dispname (str): グラフの表示名</span>
+<span class="sd">        xax_title (str): x軸のタイトル</span>
+<span class="sd">        yax_title (str): y軸のタイトル</span>
+<span class="sd">        width (int): グラフの幅</span>
+<span class="sd">        height (int): グラフの高さ</span>
+<span class="sd">        namedisplay (bool): グラフの表示名を表示するかどうか</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> 
@@ -122,9 +139,57 @@
 <div class="viewcode-block" id="EZGraph.add_graph">
 <a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.add_graph">[docs]</a>
     <span class="k">def</span> <span class="nf">add_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;lines+markers&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;グラフを追加する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xdata (): _description_</span>
+<span class="sd">            ydata (_type_): _description_</span>
+<span class="sd">            name (str, optional): _description_. Defaults to &quot;&quot;.</span>
+<span class="sd">            mode (str, optional): _description_. Defaults to &quot;lines+markers&quot;.</span>
+<span class="sd">            color (_type_, optional): _description_. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
             <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xdata</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ydata</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
-                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">),</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">),</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="EZGraph.add_markers">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.add_markers">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_markers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">7</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;マーカーを追加する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (_type_): _description_</span>
+<span class="sd">            y (_type_): _description_</span>
+<span class="sd">            name (str, optional): _description_. Defaults to &quot;&quot;.</span>
+<span class="sd">            color (_type_, optional): _description_. Defaults to None.</span>
+<span class="sd">            size (int, optional): _description_. Defaults to 7.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="EZGraph.add_line">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.add_line">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;線を追加する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (_type_): _description_</span>
+<span class="sd">            y (_type_): _description_</span>
+<span class="sd">            name (str, optional): _description_. Defaults to &quot;&quot;.</span>
+<span class="sd">            color (_type_, optional): _description_. Defaults to None.</span>
+<span class="sd">            width (float, optional): _description_. Defaults to 3.5.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
                 <span class="p">)</span>
             <span class="p">)</span></div>
 
@@ -132,18 +197,28 @@
 <div class="viewcode-block" id="EZGraph.logx">
 <a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.logx">[docs]</a>
     <span class="k">def</span> <span class="nf">logx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;x軸を対数軸にする</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="EZGraph.logy">
 <a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.logy">[docs]</a>
     <span class="k">def</span> <span class="nf">logy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;y軸を対数軸にする</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="EZGraph.legand_loc">
 <a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.legand_loc">[docs]</a>
     <span class="k">def</span> <span class="nf">legand_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">1.02</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;凡例の位置を設定する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (float, optional): . Defaults to 1.02.</span>
+<span class="sd">            y (int, optional): _description_. Defaults to 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">))</span></div>
 
 
