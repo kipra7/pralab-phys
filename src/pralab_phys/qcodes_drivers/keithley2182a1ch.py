@@ -15,7 +15,8 @@ from qcodes.parameters import Parameter
 from qcodes.validators import Enum, Numbers
 
 class Keithley2182A1ch(VisaInstrument):
-    """Instrument Driver for Keithley2182A (1 channel, Voltage only)
+    """
+    Instrument Driver for Keithley2182A (1 channel, Voltage only)
 
     Attributes:
         nplc (Parameter): Set or get the number of power line cycles (min=0.01, max=50)
@@ -25,6 +26,7 @@ class Keithley2182A1ch(VisaInstrument):
         active (Parameter): Set or get the active function. (VOLT or TEMP)
         filter (Parameter): Enables or disables the digital filter for measurements.
         amplitude (Parameter): Get the voltage (unit: V)
+
     """
     def __init__(
         self,
@@ -34,8 +36,6 @@ class Keithley2182A1ch(VisaInstrument):
         **kwargs: "Unpack[VisaInstrumentKWArgs]",
     ):
 
-        """initial
-        """
         super().__init__(name, address, **kwargs)
 
         self._trigger_sent = False

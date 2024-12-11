@@ -1,0 +1,617 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pralab_phys.qcodes_drivers package &mdash; pralab_phys  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pralab_phys.eztools package" href="pralab_phys.eztools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pralab_phys
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="pralab_phys.html">pralab_phys package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pralab_phys.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pralab_phys.analysis.html">pralab_phys.analysis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pralab_phys.ezgraph.html">pralab_phys.ezgraph package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pralab_phys.eztools.html">pralab_phys.eztools package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pralab_phys.qcodes_drivers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.QDdotNET">pralab_phys.qcodes_drivers.QDdotNET module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.keithley2182a1ch">pralab_phys.qcodes_drivers.keithley2182a1ch module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.keithley6221">pralab_phys.qcodes_drivers.keithley6221 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.qdvisa">pralab_phys.qcodes_drivers.qdvisa module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.yokogawa7651">pralab_phys.qcodes_drivers.yokogawa7651 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pralab_phys.html#module-pralab_phys">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pralab_phys.analysis.html">pralab_phys.analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pralab_phys.ezgraph.html">pralab_phys.ezgraph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pralab_phys.eztools.html">pralab_phys.eztools package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pralab_phys.qcodes_drivers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.QDdotNET">pralab_phys.qcodes_drivers.QDdotNET module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Field.get_raw"><code class="docutils literal notranslate"><span class="pre">Field.get_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Field.set_raw"><code class="docutils literal notranslate"><span class="pre">Field.set_raw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_field"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.get_field()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_idn"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.get_idn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_position"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.get_position()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_temperature"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.get_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_b_rate"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.set_b_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_field"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.set_field()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_position"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.set_position()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_t_rate"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.set_t_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_temperature"><code class="docutils literal notranslate"><span class="pre">PPMSdotNET.set_temperature()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Position"><code class="docutils literal notranslate"><span class="pre">Position</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Position.get_raw"><code class="docutils literal notranslate"><span class="pre">Position.get_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Position.set_raw"><code class="docutils literal notranslate"><span class="pre">Position.set_raw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Temperature"><code class="docutils literal notranslate"><span class="pre">Temperature</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Temperature.get_raw"><code class="docutils literal notranslate"><span class="pre">Temperature.get_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.Temperature.set_raw"><code class="docutils literal notranslate"><span class="pre">Temperature.set_raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.keithley2182a1ch">pralab_phys.qcodes_drivers.keithley2182a1ch module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley2182a1ch.Keithley2182A1ch"><code class="docutils literal notranslate"><span class="pre">Keithley2182A1ch</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.keithley6221">pralab_phys.qcodes_drivers.keithley6221 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221"><code class="docutils literal notranslate"><span class="pre">Keithley6221</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.clear"><code class="docutils literal notranslate"><span class="pre">Keithley6221.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.default_terminator"><code class="docutils literal notranslate"><span class="pre">Keithley6221.default_terminator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.off"><code class="docutils literal notranslate"><span class="pre">Keithley6221.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.on"><code class="docutils literal notranslate"><span class="pre">Keithley6221.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_abort"><code class="docutils literal notranslate"><span class="pre">Keithley6221.waveform_abort()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_arm"><code class="docutils literal notranslate"><span class="pre">Keithley6221.waveform_arm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_start"><code class="docutils literal notranslate"><span class="pre">Keithley6221.waveform_start()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.qdvisa">pralab_phys.qcodes_drivers.qdvisa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic"><code class="docutils literal notranslate"><span class="pre">PPMSClassic</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.default_terminator"><code class="docutils literal notranslate"><span class="pre">PPMSClassic.default_terminator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.purge_and_seal"><code class="docutils literal notranslate"><span class="pre">PPMSClassic.purge_and_seal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_field_approach_mode"><code class="docutils literal notranslate"><span class="pre">PPMSClassic.set_field_approach_mode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_field_rate"><code class="docutils literal notranslate"><span class="pre">PPMSClassic.set_field_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_present_position_as"><code class="docutils literal notranslate"><span class="pre">PPMSClassic.set_present_position_as()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_temperature_approach_mode"><code class="docutils literal notranslate"><span class="pre">PPMSClassic.set_temperature_approach_mode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_temperature_rate"><code class="docutils literal notranslate"><span class="pre">PPMSClassic.set_temperature_rate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers.yokogawa7651">pralab_phys.qcodes_drivers.yokogawa7651 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Current"><code class="docutils literal notranslate"><span class="pre">Current</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Current.get_raw"><code class="docutils literal notranslate"><span class="pre">Current.get_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Current.set_raw"><code class="docutils literal notranslate"><span class="pre">Current.set_raw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Mode"><code class="docutils literal notranslate"><span class="pre">Mode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Mode.get_raw"><code class="docutils literal notranslate"><span class="pre">Mode.get_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Mode.set_raw"><code class="docutils literal notranslate"><span class="pre">Mode.set_raw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Voltage"><code class="docutils literal notranslate"><span class="pre">Voltage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Voltage.get_raw"><code class="docutils literal notranslate"><span class="pre">Voltage.get_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Voltage.set_raw"><code class="docutils literal notranslate"><span class="pre">Voltage.set_raw()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651"><code class="docutils literal notranslate"><span class="pre">Yokogawa7651</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.get_idn"><code class="docutils literal notranslate"><span class="pre">Yokogawa7651.get_idn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.initialize"><code class="docutils literal notranslate"><span class="pre">Yokogawa7651.initialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.off"><code class="docutils literal notranslate"><span class="pre">Yokogawa7651.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.on"><code class="docutils literal notranslate"><span class="pre">Yokogawa7651.on()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pralab_phys.qcodes_drivers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pralab_phys</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="pralab_phys.html">pralab_phys package</a></li>
+      <li class="breadcrumb-item active">pralab_phys.qcodes_drivers package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pralab_phys.qcodes_drivers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pralab-phys-qcodes-drivers-package">
+<h1>pralab_phys.qcodes_drivers package<a class="headerlink" href="#pralab-phys-qcodes-drivers-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pralab_phys.qcodes_drivers.QDdotNET">
+<span id="pralab-phys-qcodes-drivers-qddotnet-module"></span><h2>pralab_phys.qcodes_drivers.QDdotNET module<a class="headerlink" href="#module-pralab_phys.qcodes_drivers.QDdotNET" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Field">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.QDdotNET.</span></span><span class="sig-name descname"><span class="pre">Field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET" title="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET"><span class="pre">PPMSdotNET</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Field" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></p>
+<p>Parameter class for the temperature</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Field.get_raw">
+<span class="sig-name descname"><span class="pre">get_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Field.get_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Field.get_raw" title="Link to this definition"></a></dt>
+<dd><p>Returns the magnetic field</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Field.set_raw">
+<span class="sig-name descname"><span class="pre">set_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Field.set_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Field.set_raw" title="Link to this definition"></a></dt>
+<dd><p>Sets the magnetic field</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.QDdotNET.</span></span><span class="sig-name descname"><span class="pre">PPMSdotNET</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
+<p>QD PPMS Multivu (dotNET)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_field">
+<span class="sig-name descname"><span class="pre">get_field</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.get_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_idn">
+<span class="sig-name descname"><span class="pre">get_idn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.get_idn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_idn" title="Link to this definition"></a></dt>
+<dd><p>Parse a standard VISA <code class="docutils literal notranslate"><span class="pre">*IDN?</span></code> response into an ID dict.</p>
+<p>Even though this is the VISA standard, it applies to various other
+types as well, such as IPInstruments, so it is included here in the
+Instrument base class.</p>
+<p>Override this if your instrument does not support <code class="docutils literal notranslate"><span class="pre">*IDN?</span></code> or
+returns a nonstandard IDN string. This string is supposed to be a
+comma-separated list of vendor, model, serial, and firmware, but
+semicolon and colon are also common separators so we accept them here
+as well.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A dict containing vendor, model, serial, and firmware.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_position">
+<span class="sig-name descname"><span class="pre">get_position</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.get_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_position" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_temperature">
+<span class="sig-name descname"><span class="pre">get_temperature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.get_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.get_temperature" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_b_rate">
+<span class="sig-name descname"><span class="pre">set_b_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.set_b_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_b_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_field">
+<span class="sig-name descname"><span class="pre">set_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.set_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_position">
+<span class="sig-name descname"><span class="pre">set_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.set_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_position" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_t_rate">
+<span class="sig-name descname"><span class="pre">set_t_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.set_t_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_t_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_temperature">
+<span class="sig-name descname"><span class="pre">set_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#PPMSdotNET.set_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET.set_temperature" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Position">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.QDdotNET.</span></span><span class="sig-name descname"><span class="pre">Position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET" title="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET"><span class="pre">PPMSdotNET</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Position" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></p>
+<p>Parameter class for the motor position</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Position.get_raw">
+<span class="sig-name descname"><span class="pre">get_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Position.get_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Position.get_raw" title="Link to this definition"></a></dt>
+<dd><p>Returns the motor position</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Position.set_raw">
+<span class="sig-name descname"><span class="pre">set_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Position.set_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Position.set_raw" title="Link to this definition"></a></dt>
+<dd><p>Sets the motor position</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Temperature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.QDdotNET.</span></span><span class="sig-name descname"><span class="pre">Temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET" title="pralab_phys.qcodes_drivers.QDdotNET.PPMSdotNET"><span class="pre">PPMSdotNET</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Temperature" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></p>
+<p>Parameter class for the temperature</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Temperature.get_raw">
+<span class="sig-name descname"><span class="pre">get_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Temperature.get_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Temperature.get_raw" title="Link to this definition"></a></dt>
+<dd><p>Returns the temperature</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.QDdotNET.Temperature.set_raw">
+<span class="sig-name descname"><span class="pre">set_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/QDdotNET.html#Temperature.set_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.QDdotNET.Temperature.set_raw" title="Link to this definition"></a></dt>
+<dd><p>Sets the temperature</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pralab_phys.qcodes_drivers.keithley2182a1ch">
+<span id="pralab-phys-qcodes-drivers-keithley2182a1ch-module"></span><h2>pralab_phys.qcodes_drivers.keithley2182a1ch module<a class="headerlink" href="#module-pralab_phys.qcodes_drivers.keithley2182a1ch" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley2182a1ch.Keithley2182A1ch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.keithley2182a1ch.</span></span><span class="sig-name descname"><span class="pre">Keithley2182A1ch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley2182a1ch.html#Keithley2182A1ch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley2182a1ch.Keithley2182A1ch" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VisaInstrument</span></code></p>
+<p>Instrument Driver for Keithley2182A (1 channel, Voltage only)</p>
+<dl>
+<dt>Attributes:</dt><dd><p>nplc (Parameter): Set or get the number of power line cycles (min=0.01, max=50)
+auto_range (Parameter): Set or get the measurement range automatically (1: ON, 0: OFF)
+rel (Parameter): Enables or disables the application of</p>
+<blockquote>
+<div><p>a relative offset value to the measurement. (1: ON, 0: OFF)</p>
+</div></blockquote>
+<p>active (Parameter): Set or get the active function. (VOLT or TEMP)
+filter (Parameter): Enables or disables the digital filter for measurements.
+amplitude (Parameter): Get the voltage (unit: V)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pralab_phys.qcodes_drivers.keithley6221">
+<span id="pralab-phys-qcodes-drivers-keithley6221-module"></span><h2>pralab_phys.qcodes_drivers.keithley6221 module<a class="headerlink" href="#module-pralab_phys.qcodes_drivers.keithley6221" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.keithley6221.</span></span><span class="sig-name descname"><span class="pre">Keithley6221</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VisaInstrument</span></code></p>
+<p>Instrument Driver for Keithley6221</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.clear" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221.default_terminator">
+<span class="sig-name descname"><span class="pre">default_terminator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\r\n'</span></em><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.default_terminator" title="Link to this definition"></a></dt>
+<dd><p>The default terminator to use if the terminator is not specified when creating the instrument.
+None means use the default terminator from PyVisa.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221.off">
+<span class="sig-name descname"><span class="pre">off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221.off"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.off" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221.on">
+<span class="sig-name descname"><span class="pre">on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221.on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_abort">
+<span class="sig-name descname"><span class="pre">waveform_abort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221.waveform_abort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_abort" title="Link to this definition"></a></dt>
+<dd><p>Abort the waveform output and disarm the waveform function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_arm">
+<span class="sig-name descname"><span class="pre">waveform_arm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221.waveform_arm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_arm" title="Link to this definition"></a></dt>
+<dd><p>Arm the current waveform function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_start">
+<span class="sig-name descname"><span class="pre">waveform_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221.waveform_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_start" title="Link to this definition"></a></dt>
+<dd><p>Start the waveform output. Must already be armed</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pralab_phys.qcodes_drivers.qdvisa">
+<span id="pralab-phys-qcodes-drivers-qdvisa-module"></span><h2>pralab_phys.qcodes_drivers.qdvisa module<a class="headerlink" href="#module-pralab_phys.qcodes_drivers.qdvisa" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.qdvisa.</span></span><span class="sig-name descname"><span class="pre">PPMSClassic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/qdvisa.html#PPMSClassic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VisaInstrument</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.default_terminator">
+<span class="sig-name descname"><span class="pre">default_terminator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\r\n'</span></em><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.default_terminator" title="Link to this definition"></a></dt>
+<dd><p>The default terminator to use if the terminator is not specified when creating the instrument.
+None means use the default terminator from PyVisa.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.purge_and_seal">
+<span class="sig-name descname"><span class="pre">purge_and_seal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/qdvisa.html#PPMSClassic.purge_and_seal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.purge_and_seal" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_field_approach_mode">
+<span class="sig-name descname"><span class="pre">set_field_approach_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/qdvisa.html#PPMSClassic.set_field_approach_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_field_approach_mode" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_field_rate">
+<span class="sig-name descname"><span class="pre">set_field_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/qdvisa.html#PPMSClassic.set_field_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_field_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_present_position_as">
+<span class="sig-name descname"><span class="pre">set_present_position_as</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/qdvisa.html#PPMSClassic.set_present_position_as"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_present_position_as" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_temperature_approach_mode">
+<span class="sig-name descname"><span class="pre">set_temperature_approach_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/qdvisa.html#PPMSClassic.set_temperature_approach_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_temperature_approach_mode" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_temperature_rate">
+<span class="sig-name descname"><span class="pre">set_temperature_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/qdvisa.html#PPMSClassic.set_temperature_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.qdvisa.PPMSClassic.set_temperature_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pralab_phys.qcodes_drivers.yokogawa7651">
+<span id="pralab-phys-qcodes-drivers-yokogawa7651-module"></span><h2>pralab_phys.qcodes_drivers.yokogawa7651 module<a class="headerlink" href="#module-pralab_phys.qcodes_drivers.yokogawa7651" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Current">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.yokogawa7651.</span></span><span class="sig-name descname"><span class="pre">Current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651" title="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651"><span class="pre">Yokogawa7651</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Current" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Current.get_raw">
+<span class="sig-name descname"><span class="pre">get_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Current.get_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Current.get_raw" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">get_raw</span></code> is called to perform the actual data acquisition from the
+instrument. This method should either be overwritten to perform the
+desired operation or alternatively for <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code> a
+suitable method is automatically generated if <code class="docutils literal notranslate"><span class="pre">get_cmd</span></code> is supplied
+to the parameter constructor. The method is automatically wrapped to
+provide a <code class="docutils literal notranslate"><span class="pre">get</span></code> method on the parameter instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Current.set_raw">
+<span class="sig-name descname"><span class="pre">set_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Current.set_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Current.set_raw" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">set_raw</span></code> is called to perform the actual setting of a parameter on
+the instrument. This method should either be overwritten to perform the
+desired operation or alternatively for <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code> a
+suitable method is automatically generated if <code class="docutils literal notranslate"><span class="pre">set_cmd</span></code> is supplied
+to the parameter constructor. The method is automatically wrapped to
+provide a <code class="docutils literal notranslate"><span class="pre">set</span></code> method on the parameter instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Mode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.yokogawa7651.</span></span><span class="sig-name descname"><span class="pre">Mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651" title="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651"><span class="pre">Yokogawa7651</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Mode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Mode.get_raw">
+<span class="sig-name descname"><span class="pre">get_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Mode.get_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Mode.get_raw" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">get_raw</span></code> is called to perform the actual data acquisition from the
+instrument. This method should either be overwritten to perform the
+desired operation or alternatively for <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code> a
+suitable method is automatically generated if <code class="docutils literal notranslate"><span class="pre">get_cmd</span></code> is supplied
+to the parameter constructor. The method is automatically wrapped to
+provide a <code class="docutils literal notranslate"><span class="pre">get</span></code> method on the parameter instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Mode.set_raw">
+<span class="sig-name descname"><span class="pre">set_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Mode.set_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Mode.set_raw" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">set_raw</span></code> is called to perform the actual setting of a parameter on
+the instrument. This method should either be overwritten to perform the
+desired operation or alternatively for <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code> a
+suitable method is automatically generated if <code class="docutils literal notranslate"><span class="pre">set_cmd</span></code> is supplied
+to the parameter constructor. The method is automatically wrapped to
+provide a <code class="docutils literal notranslate"><span class="pre">set</span></code> method on the parameter instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Voltage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.yokogawa7651.</span></span><span class="sig-name descname"><span class="pre">Voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651" title="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651"><span class="pre">Yokogawa7651</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Voltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Voltage" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Voltage.get_raw">
+<span class="sig-name descname"><span class="pre">get_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Voltage.get_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Voltage.get_raw" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">get_raw</span></code> is called to perform the actual data acquisition from the
+instrument. This method should either be overwritten to perform the
+desired operation or alternatively for <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code> a
+suitable method is automatically generated if <code class="docutils literal notranslate"><span class="pre">get_cmd</span></code> is supplied
+to the parameter constructor. The method is automatically wrapped to
+provide a <code class="docutils literal notranslate"><span class="pre">get</span></code> method on the parameter instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Voltage.set_raw">
+<span class="sig-name descname"><span class="pre">set_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Voltage.set_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Voltage.set_raw" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">set_raw</span></code> is called to perform the actual setting of a parameter on
+the instrument. This method should either be overwritten to perform the
+desired operation or alternatively for <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code> a
+suitable method is automatically generated if <code class="docutils literal notranslate"><span class="pre">set_cmd</span></code> is supplied
+to the parameter constructor. The method is automatically wrapped to
+provide a <code class="docutils literal notranslate"><span class="pre">set</span></code> method on the parameter instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.yokogawa7651.</span></span><span class="sig-name descname"><span class="pre">Yokogawa7651</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Yokogawa7651"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VisaInstrument</span></code></p>
+<p>QCoDeS driver for the Yokogawa 7651 I/V source.</p>
+<dl class="simple">
+<dt>Args:  </dt><dd><p>VisaInstrument (_type_): _description_</p>
+</dd>
+<dt>Attributes:  </dt><dd><dl class="simple">
+<dt>voltage_range (Parameter):</dt><dd><p>Set output voltage range in mV.</p>
+</dd>
+<dt>current_range (Parameter):</dt><dd><p>Set output current range in mA.</p>
+</dd>
+<dt>voltage_limit (Parameter):</dt><dd><p>Set output voltage limit in mV.</p>
+</dd>
+<dt>current_limit (Parameter):</dt><dd><p>Set output current limit in mA.</p>
+</dd>
+<dt>voltage (Parameter):</dt><dd><p>Set output voltage in mV.</p>
+</dd>
+<dt>current (Parameter):</dt><dd><p>Set output current in mA.</p>
+</dd>
+<dt>output (Parameter):</dt><dd><p>Output Status. (“on”, “off”)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.get_idn">
+<span class="sig-name descname"><span class="pre">get_idn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Yokogawa7651.get_idn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.get_idn" title="Link to this definition"></a></dt>
+<dd><p>Parse a standard VISA <code class="docutils literal notranslate"><span class="pre">*IDN?</span></code> response into an ID dict.</p>
+<p>Even though this is the VISA standard, it applies to various other
+types as well, such as IPInstruments, so it is included here in the
+Instrument base class.</p>
+<p>Override this if your instrument does not support <code class="docutils literal notranslate"><span class="pre">*IDN?</span></code> or
+returns a nonstandard IDN string. This string is supposed to be a
+comma-separated list of vendor, model, serial, and firmware, but
+semicolon and colon are also common separators so we accept them here
+as well.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A dict containing vendor, model, serial, and firmware.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Yokogawa7651.initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.initialize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.off">
+<span class="sig-name descname"><span class="pre">off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Yokogawa7651.off"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.off" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.on">
+<span class="sig-name descname"><span class="pre">on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Yokogawa7651.on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651.on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pralab_phys.qcodes_drivers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pralab_phys.qcodes_drivers" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pralab_phys.eztools.html" class="btn btn-neutral float-left" title="pralab_phys.eztools package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Author.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

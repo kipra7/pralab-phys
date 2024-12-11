@@ -20,13 +20,26 @@ class Yokogawa7651(VisaInstrument):
         VisaInstrument (_type_): _description_  
 
     Attributes:  
-        voltage_range (Parameter): Set output voltage range in mV.  
-        current_range (Parameter): Set output current range in mA.  
-        voltage_limit (Parameter): Set output voltage limit in mV.  
-        current_limit (Parameter): Set output current limit in mA.  
-        voltage (Parameter): Set output voltage in mV.  
-        current (Parameter): Set output current in mA.  
-        output (Parameter): Output Status. ("on", "off")
+        voltage_range (Parameter):
+			Set output voltage range in mV.  
+
+        current_range (Parameter):
+			Set output current range in mA.  
+
+        voltage_limit (Parameter):
+			Set output voltage limit in mV.  
+
+        current_limit (Parameter):
+			Set output current limit in mA. 
+
+        voltage (Parameter):
+			Set output voltage in mV.  
+
+        current (Parameter):
+			Set output current in mA.  
+
+        output (Parameter):
+			Output Status. ("on", "off")
     """  
 	def __init__(self, name, address, **kwargs):
 		# supplying the terminator means you don't need to remove it from every response
@@ -35,6 +48,7 @@ class Yokogawa7651(VisaInstrument):
 		# init: crashes the I/O, clear from visa test panel fixes the issue
 		# self.write('RC')
 
+		
 		self._status = {
 			'mode': 'Voltage',
 			'voltage_limit': None,
@@ -42,7 +56,15 @@ class Yokogawa7651(VisaInstrument):
 			'current': 0,
 			'voltage': 0
 			}
+		''' 
+			A Parameter object for the current output of the Yokogawa7651.
 
+			Args:
+				current: The current output of the Yokogawa7651. (mA)
+
+			Returns:
+				The current output of the Yokogawa7651. (mA)
+		'''
 		self.current: Parameter = self.add_parameter(
             name="current",
             parameter_class=Current,
@@ -238,3 +260,6 @@ class Mode(Parameter):
 			self.instrument.write('F1E')
 		elif value == "Current":
 			self.instrument.write('F5E')
+
+
+
