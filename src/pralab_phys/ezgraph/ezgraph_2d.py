@@ -1,4 +1,5 @@
 import plotly.graph_objects as go
+from collections.abc import Collection
 
 class EZGraph(go.Figure):
     '''2次元グラフを描画するためのクラス
@@ -59,15 +60,31 @@ class EZGraph(go.Figure):
             tickcolor='grey'
             )
     
-    def add_graph(self, xdata, ydata, name = "", mode = "lines+markers", color = None):
-        """グラフを追加する
+    def add_graph(
+        self,
+        xdata: Collection, 
+        ydata: Collection, 
+        name: str = "", 
+        mode: str = "lines+markers", 
+        color: str | None = None
+    ):
+        """Add a graph to the figure.
 
         Args:
-            xdata (): _description_
-            ydata (_type_): _description_
-            name (str, optional): _description_. Defaults to "".
-            mode (str, optional): _description_. Defaults to "lines+markers".
-            color (_type_, optional): _description_. Defaults to None.
+            xdata (Collection):
+                x-axis data
+
+            ydata (Collection):
+                y-axis data
+
+            name (str, optional):
+                name of the graph. Defaults to "".
+
+            mode (str, optional):
+                mode of the graph. Defaults to "lines+markers".
+
+            color (str | None, optional): 
+                plot color. Defaults to None (default color).
         """
         self.add_trace(
             go.Scatter(x=xdata, y=ydata, mode=mode, name=name, 
@@ -76,30 +93,34 @@ class EZGraph(go.Figure):
             )
 
 
-    def add_markers(self, x, y, name = "", color = None, size = 7):
-        """マーカーを追加する
+    def add_markers(self, x: Collection, y: Collection, name: str = "", color: str | None = None, size: float = 7):
+        """_summary_
 
         Args:
-            x (_type_): _description_
-            y (_type_): _description_
+            x (Collection): _description_
+            y (Collection): _description_
             name (str, optional): _description_. Defaults to "".
-            color (_type_, optional): _description_. Defaults to None.
-            size (int, optional): _description_. Defaults to 7.
+            color (str | None, optional): _description_. Defaults to None.
+            size (int | float, optional): _description_. Defaults to 7.
         """
+
         self.add_trace(
-            go.Scatter(x=[x], y=[y], mode="markers", name=name, 
+            go.Scatter(x=x, y=y, mode="markers", name=name, 
                 marker=dict(size=size, color=color)
                 )
             )
         
-    def add_line(self, x, y, name = "", color = None, width = 3.5):
-        """線を追加する
+    def add_line(self, x: Collection, y: Collection, name: str = "", color: str | None = None, width: float = 3.5):
+        """Add a line to the figure.
 
         Args:
-            x (_type_): _description_
-            y (_type_): _description_
-            name (str, optional): _description_. Defaults to "".
-            color (_type_, optional): _description_. Defaults to None.
+            x (Collection): 
+                x-axis data
+            y (Collection):
+                y-axis data
+            name (str, optional):
+                Name of the line. Defaults to "".
+            color (str | None, optional): _description_. Defaults to None.
             width (float, optional): _description_. Defaults to 3.5.
         """
         self.add_trace(
@@ -118,12 +139,12 @@ class EZGraph(go.Figure):
         """
         self.update_yaxes(type="log")
 
-    def legand_loc(self, x = 1.02, y = 1):
+    def legand_loc(self, x: float = 1.02, y: float = 1):
         """凡例の位置を設定する
 
         Args:
             x (float, optional): . Defaults to 1.02.
-            y (int, optional): _description_. Defaults to 1.
+            y (float, optional): _description_. Defaults to 1.
         """
         self.update_layout(legend=dict(x=x, y=y))
 

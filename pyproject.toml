@@ -13,8 +13,7 @@ dependencies = [
     "pyvisa>=1.14.1",
     "qcodes>=0.48.0",
     "pythonnet>=3.0.3",
-    "ipywidgets>=8.1.5",
-    "sphinx>=8.1.3",
+    "ipywidgets>=8.1.5"
 ]
 
 [tool.uv]
