@@ -1,59 +1,87 @@
 import sys
 import clr
+from System import Double, UInt16, Int32
+
 from qcodes.instrument.parameter import Parameter
 from qcodes.instrument.base import Instrument
 
-sys.path.append(r"C:\qd")
-
 # add .net reference and import so python can see .net
-clr.AddReference(r"QDInstrument")
-
-from QuantumDesign.QDInstrument import QDInstrumentBase, QDInstrumentFactory
 
 DEFAULT_PORT = 11000
 
-class PPMSdotNET(Instrument):
-    """
-    QD PPMS Multivu (dotNET)
-    """
+class QDdotNET(Instrument):
+
     def __init__(
         self,
         name: str,
         ip_address: str,
-        remote: bool = True,
+        instruent_type = "DynaCool",
+        remote: bool = False,
+        QDInstrumentdir: str = "",
+        QDInstrumentname: str = "QDInstrument",
+        port = DEFAULT_PORT,
         **kwargs,
     ) -> None:
         super().__init__(name=name, **kwargs)
 
-        self.device = QDInstrumentFactory.GetQDInstrument(
-            QDInstrumentBase.QDInstrumentType.PPMS, remote, ip_address, DEFAULT_PORT)
+        clr.AddReference(QDInstrumentdir+QDInstrumentname)
+        
+        from QuantumDesign.QDInstrument import QDInstrumentBase, QDInstrumentFactory
 
-        self.Trate: float = 1.0
-        self.Brate: float = 20.0
-        self.Tmode: int = 0
-        self.Bmode: int = 0
+        INST_MAP = {"PPMS": QDInstrumentBase.QDInstrumentType.PPMS, "DynaCool":  QDInstrumentBase.QDInstrumentType.DynaCool}
 
-        # Create Position parameter
-        self.position: Parameter = self.add_parameter(
-            name="position",
-            parameter_class=Position,
-            label="Motor position",
-            unit="deg",
-        )
+        self.QDIBase = QDInstrumentBase
+        self.QDIFactory = QDInstrumentFactory
+        try:
+            self.device = QDInstrumentFactory.GetQDInstrument(INST_MAP[instruent_type], remote, ip_address, UInt16(port))
+        except Exception:
+            raise RuntimeError("Unsupported instrument_type")
+        
+        self.Brate = 100
+        self.Trate = 10
+        self.minimim_temperature = 1.8
 
         self.temperature: Parameter = self.add_parameter(
-            name="temperature",
-            parameter_class=Temperature,
-            label="Temperature",
-            unit="K",
+            name = "temperature",
+            parameter_class=QDTemperature,
+            label = "temperature",
+            unit = "K"
+        )
+
+        self.temperaturestarus: Parameter = self.add_parameter(
+            name = "temperature_status",
+            parameter_class = QDTemperatureStatus,
+            label = "temperature status",
+        )
+
+        self.fieldstatus: Parameter = self.add_parameter(
+            name = "field_status",
+            parameter_class = QDFieldStatus,
+            label = "field status",
         )
 
         self.field: Parameter = self.add_parameter(
-            name="field",
-            parameter_class=Field,
-            label="Field",
-            unit="Oe",
+            name = "field",
+            parameter_class = QDField,
+            label = "field",
+            unit = "T"
         )
+
+        self.position: Parameter = self.add_parameter(
+            name = "position",
+            parameter_class = QDPosition,
+            label = "position",
+            unit = "deg"
+        )
+
+    def get_field(self):
+        return self.device.GetField(Double(0), self.QDIBase.FieldStatus(Int32(0)))
+    
+    def set_field(self, field):
+        if -90000 <= field <= 90000:
+            return self.device.SetField(field, self.Brate, self.Bmode, 0)
+        else:
+            raise RuntimeError("Field is out of bounds. Should be between -90000 and 90000 Oe")
 
     def get_position(self):
         return float(str(self.device.GetPosition("Horizontal Rotator", 0, 0)))
@@ -62,28 +90,22 @@ class PPMSdotNET(Instrument):
         return self.device.SetPosition("Horizontal Rotator", position, 0, 0)
 
     def set_temperature(self, temp):
-        if 1.9 <= temp <= 320:
-            return self.device.SetTemperature(temp, self.Trate, self.Tmode)
+        if self.minimim_temperature <= temp <= 350:
+            return self.device.SetTemperature(temp, self.Trate, self.QDIBase.TemperatureApproach(Int32(0)))
         else:
-            raise RuntimeError("Temperature is out of bounds. Should be between 0 and 320 K")
+            raise RuntimeError("Temperature is out of bounds. Should be between " + str(self.minimim_temperature) + " and 350 K")
 
     def get_temperature(self) -> float:
-        return float(set(self.device.GetTemperature(0, 0)))
+        error, temperature, status = self.device.GetTemperature(Double(0), self.QDIBase.TemperatureStatus(Int32(0)))
+        return (error, temperature, status)
 
-    def set_field(self, field):
-        if -85000 <= field <= 85000:
-            return self.device.SetField(field, self.Brate, self.Bmode, 0)
-        else:
-            raise RuntimeError("Field is out of bounds. Should be between -85000 and 85000 Oe")
-
-    def get_field(self) -> float:
-        return float(set(self.device.GetField(0, 0)))
+    
         
     def set_t_rate(self, rate: float):
         self.Trate = rate
     
     def set_b_rate(self, rate: float):
-        self.rate = rate
+        self.Brate = rate
 
     def get_idn(self):
         return {
@@ -92,16 +114,16 @@ class PPMSdotNET(Instrument):
             "serial": self.serial,
             "firmware": None,
         }
+    
 
-
-class Position(Parameter):
+class QDPosition(Parameter):
     """
     Parameter class for the motor position
     """
     def __init__(
         self,
         name: str,
-        instrument: PPMSdotNET,
+        instrument: QDdotNET,
         **kwargs,
     ) -> None:
         super().__init__(name, instrument=instrument, **kwargs)
@@ -115,14 +137,14 @@ class Position(Parameter):
         return self.instrument.get_position()
 
 
-class Temperature(Parameter):
+class QDTemperature(Parameter):
     """
     Parameter class for the temperature
     """
     def __init__(
         self,
         name: str,
-        instrument: PPMSdotNET,
+        instrument: QDdotNET,
         **kwargs,
     ) -> None:
         super().__init__(name, instrument=instrument, **kwargs)
@@ -133,17 +155,34 @@ class Temperature(Parameter):
 
     def get_raw(self) -> float:
         """Returns the temperature"""
-        return self.instrument.get_temperature()
+        return self.instrument.get_temperature()[1]
 
 
-class Field(Parameter):
+class QDTemperatureStatus(Parameter):
+    """
+    Parameter class for the temperature status
+    """
+    def __init__(
+        self,
+        name: str,
+        instrument: QDdotNET,
+        **kwargs,
+    ) -> None:
+        super().__init__(name, instrument=instrument, **kwargs)
+
+    def get_raw(self) -> str:
+        """Returns the temperature status"""
+        return self.instrument.get_temperature()[2]
+
+
+class QDField(Parameter):
     """
     Parameter class for the temperature
     """
     def __init__(
         self,
         name: str,
-        instrument: PPMSdotNET,
+        instrument: QDdotNET,
         **kwargs,
     ) -> None:
         super().__init__(name, instrument=instrument, **kwargs)
@@ -154,4 +193,21 @@ class Field(Parameter):
 
     def get_raw(self) -> float:
         """Returns the magnetic field"""
-        return self.instrument.get_field()
+        return self.instrument.get_field()[1]
+
+
+class QDFieldStatus(Parameter):
+    """
+    Parameter class for the magnetic field status
+    """
+    def __init__(
+        self,
+        name: str,
+        instrument: QDdotNET,
+        **kwargs,
+    ) -> None:
+        super().__init__(name, instrument=instrument, **kwargs)
+
+    def get_raw(self) -> str:
+        """Returns the magnetic field status"""
+        return self.instrument.get_field()[2]

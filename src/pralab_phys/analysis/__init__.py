@@ -1,26 +1,28 @@
 from collections.abc import Collection
 from numbers import Real
 
+import pandas as pd
 
-def critical_current(current: Collection[Real], voltage: Collection[Real], threshold: Real | None = None) -> float:
+
+def critical_current(current: Collection[Real], resistance: Collection[Real], threshold: Real | None = None) -> float:
     """
-    Calculate the critical current from a current-voltage curve.
+    Calculate the critical current from a current-resistance curve.
 
     Args:
         current: The current values.
-        voltage: The voltage values.
-        threshold: The threshold voltage. If None, the threshold is calculated as the maximum voltage divided by 2.
+        resistance: The resistance values.
+        threshold: The threshold resistance. If None, the threshold is calculated as the maximum resistance divided by 2.
 
     Returns:
         The critical current.
     """
-    if len(current) != len(voltage):
-        raise ValueError("The current and voltage arrays must have the same length.")
+    if len(current) != len(resistance):
+        raise ValueError("The current and resistance arrays must have the same length.")
 
     if threshold is None:
-        threshold = max(voltage) / 2
+        threshold = max(resistance) / 2
 
-    for i, v in enumerate(voltage):
+    for i, v in enumerate(resistance):
         if v > threshold:
             return current[i]
 
@@ -70,3 +72,27 @@ def ic_to_jc(ic: Real, width: Real, height: Real) -> float:
     # kA/cm^2 = (10^-3 A)/(10^2 m)^2 = (10^-6 mA)/(10^-7 cm)^2
 
     return ic / (width * height) * 10**(-6 + 7 * 2) # kA/cm^2
+
+
+def xnn_to_dataframe(xnn_path: str) -> pd.DataFrame:
+    """
+    Convert an XNN file to a pandas DataFrame.
+
+    Args:
+        xnn_path: The path to the XNN file.
+
+    Returns:
+        The DataFrame.
+    """
+    with open(xnn_path, "r") as f:
+        lines = f.readlines()
+
+    data = []
+
+    for line in lines:
+        if line.startswith("#"):
+            continue
+
+        data.append(list(map(float, line.split())))
+
+    return pd.DataFrame(data)

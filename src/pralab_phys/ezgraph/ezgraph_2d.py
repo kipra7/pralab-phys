@@ -10,7 +10,6 @@ class EZGraph(go.Figure):
         yax_title (str): y軸のタイトル
         width (int): グラフの幅
         height (int): グラフの高さ
-        namedisplay (bool): グラフの表示名を表示するかどうか
     '''
 
     def __init__(
@@ -20,16 +19,12 @@ class EZGraph(go.Figure):
         yax_title:str = "",
         width:int = 900, 
         height:int = 600,
-        namedisplay:bool = True,
     ):
         super().__init__()
 
         # plotly側の設定により、最初にアンダーバーを入れないとエラーを吐く
         # 修正を要検討
         self._dispname = dispname
-
-        if not namedisplay:
-            self._dispname = ""
 
         self.update_layout(
             title = dict(text = "<b>" + self._dispname, font = dict(size=22, color='gray'), y = 0.95),

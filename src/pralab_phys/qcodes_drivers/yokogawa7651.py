@@ -65,23 +65,23 @@ class Yokogawa7651(VisaInstrument):
 			Returns:
 				The current output of the Yokogawa7651. (mA)
 		'''
-		self.current: Parameter = self.add_parameter(
+		self.auto_current: Parameter = self.add_parameter(
             name="current",
-            parameter_class=Current,
+            parameter_class=Y7651AutoCurrent,
             label="current",
             unit="mA",
         )
 
-		self.voltage: Parameter = self.add_parameter(
+		self.auto_voltage: Parameter = self.add_parameter(
 			name="voltage",
-			parameter_class=Voltage,
+			parameter_class=Y7651AutoVoltage,
 			label="voltage",
 			unit="mV",
 		)
 
 		self.mode: Parameter = self.add_parameter(
 			name="mode",
-			parameter_class=Mode,
+			parameter_class=Y7651Mode,
 			label="mode",
 		)
 
@@ -90,7 +90,8 @@ class Yokogawa7651(VisaInstrument):
 			label = 'Set the output voltage range in mV',
 			vals = vals.Enum(10, 100, 1000, 10000, 30000),
 			unit   = 'mV',
-			set_cmd = partial(self._set_range, mode = "VOLT")
+			set_cmd = partial(self._set_range, mode = "VOLT"),
+			get_cmd = None
 			)
 
 		self.current_range: Parameter = self.add_parameter(
@@ -98,8 +99,16 @@ class Yokogawa7651(VisaInstrument):
 			label = 'Set output current range in mA',
 			vals = vals.Enum(1,10,100),
 			unit   = 'mA',
-			set_cmd = partial(self._set_range, mode = "CURR")
+			set_cmd = partial(self._set_range, mode = "CURR"),
+			get_cmd = None
 			)
+
+		self.auto_range: Parameter = self.add_parameter(
+			"auto_range", 
+			label="Auto Range", 
+			set_cmd=self._set_auto_range, 
+			get_cmd=None, 
+			initial_cache_value=False)
 
 		self.voltage_limit: Parameter = self.add_parameter(
 			name = 'voltage_limit',  
@@ -211,7 +220,7 @@ class Yokogawa7651(VisaInstrument):
 		return self.ask('OS')
 
 
-class Current(Parameter):
+class Y7651AutoCurrent(Parameter):
 	def __init__(
         self,
         name: str,
@@ -224,10 +233,10 @@ class Current(Parameter):
 		return self.instrument._status["current"]
 
 	def set_raw(self, value):
-		self.instrument.set_A(value)
+		self.instrument._set_A(value)
 
 
-class Voltage(Parameter):
+class Y7651AutoVoltage(Parameter):
 	def __init__(
 		self,
 		name: str,
@@ -240,10 +249,10 @@ class Voltage(Parameter):
 		return self.instrument._status["voltage"]
 
 	def set_raw(self, value):
-		self.instrument.set_V(value)
+		self.instrument._set_V(value)
 
 
-class Mode(Parameter):
+class Y7651Mode(Parameter):
 	def __init__(
 		self,
 		name: str,
