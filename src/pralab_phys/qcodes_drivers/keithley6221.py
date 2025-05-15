@@ -116,11 +116,11 @@ class Keithley6221(VisaInstrument):
             vals=Numbers(min_value=-180, max_value=180),
     )
         
-        self.wave_phasemarker_line = Instrument.control(
+        self.wave_phasemarker_line: Parameter = self.add_parameter(
             "wave_phasemarker_line",
             get_cmd="SOUR:WAVE:PMAR:OLIN?",
             set_cmd="SOUR:WAVE:PMAR:OLIN {}",
-            values=Enum(1, 2, 3, 4, 5, 6),
+            vals=Enum(1, 2, 3, 4, 5, 6),
         )
 
     def waveform_arm(self):
