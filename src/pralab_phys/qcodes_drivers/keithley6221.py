@@ -103,20 +103,21 @@ class Keithley6221(VisaInstrument):
         )
 
         self.wave_use_phasemarker: Parameter = self.add_parameter(
-            "waveform_use_phasemarker",
+            "wave_use_phasemarker",
             get_cmd="SOUR:WAVE:PMAR:STAT?",
             set_cmd="SOUR:WAVE:PMAR:STAT {}",
             vals=Enum("0", "1")
         )
 
         self.wave_phasemarker_phase: Parameter = self.add_parameter(
+            "wave_phasemarker_phase",
             get_cmd="SOUR:WAVE:PMAR?",
             set_cmd="SOUR:WAVE:PMAR {}",
             vals=Numbers(min_value=-180, max_value=180),
     )
         
         self.wave_phasemarker_line = Instrument.control(
-            """ A numerical property that controls the line of the phase marker.""",
+            "wave_phasemarker_line",
             get_cmd="SOUR:WAVE:PMAR:OLIN?",
             set_cmd="SOUR:WAVE:PMAR:OLIN {}",
             values=Enum(1, 2, 3, 4, 5, 6),
