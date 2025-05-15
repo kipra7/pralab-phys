@@ -62,7 +62,7 @@ class RealTimePlot:
 
     def run(self, debug=True):
         # Dash サーバーを起動
-        self.app.run_server(debug=debug)
+        self.app.run(debug=debug)
 
 if __name__ == '__main__':
     # サンプル実行: X軸とY軸のラベルを指定してサーバーを起動

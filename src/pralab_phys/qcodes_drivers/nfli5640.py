@@ -20,7 +20,7 @@ import math
 class nfLI5640(VisaInstrument):
     """Instrument Driver for Keithley6221"""
 
-    default_terminator = "\r\n"
+    default_terminator = "\n"
 
     def __init__(
         self,
