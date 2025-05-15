@@ -34,13 +34,6 @@ class nfLI5640(VisaInstrument):
         """
         super().__init__(name, address, **kwargs)
 
-        self.get_data: Parameter = self.add_parameter(
-            "get_data",
-            get_cmd="DOUT?",
-            set_cmd=None,
-            unit="V",
-        )
-
         self.getdata: Parameter = self.add_parameter(
             name = "getdata",
             parameter_class=nfLI5640GetData,
