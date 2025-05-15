@@ -215,6 +215,9 @@ class Yokogawa7651(VisaInstrument):
 	def initialize(self):
 		self.write('RC')
 
+	def reverse(self):
+		self.write('RC')
+
 	# To avoid identity query error
 	def get_idn(self):
 		return self.ask('OS')

@@ -48,16 +48,10 @@ class QDdotNET(Instrument):
             unit = "K"
         )
 
-        self.temperaturestarus: Parameter = self.add_parameter(
-            name = "temperature_status",
-            parameter_class = QDTemperatureStatus,
-            label = "temperature status",
-        )
-
-        self.fieldstatus: Parameter = self.add_parameter(
-            name = "field_status",
-            parameter_class = QDFieldStatus,
-            label = "field status",
+        self.temperaturestatus: Parameter = self.add_parameter(
+            name = "temperaturestatus",
+            parameter_class=QDTemperatureStatus,
+            label = "temperaturestatus",
         )
 
         self.field: Parameter = self.add_parameter(
@@ -65,6 +59,12 @@ class QDdotNET(Instrument):
             parameter_class = QDField,
             label = "field",
             unit = "T"
+        )
+
+        self.fieldstatus: Parameter = self.add_parameter(
+            name = "fieldstatus",
+            parameter_class = QDFieldStatus,
+            label = "fieldstatus",
         )
 
         self.position: Parameter = self.add_parameter(
@@ -79,7 +79,7 @@ class QDdotNET(Instrument):
     
     def set_field(self, field):
         if -90000 <= field <= 90000:
-            return self.device.SetField(field, self.Brate, self.Bmode, 0)
+            return self.device.SetField(field, self.Brate, self.QDIBase.FieldApproach(Int32(0)), self.QDIBase.FieldMode(0))
         else:
             raise RuntimeError("Field is out of bounds. Should be between -90000 and 90000 Oe")
 
@@ -99,8 +99,6 @@ class QDdotNET(Instrument):
         error, temperature, status = self.device.GetTemperature(Double(0), self.QDIBase.TemperatureStatus(Int32(0)))
         return (error, temperature, status)
 
-    
-        
     def set_t_rate(self, rate: float):
         self.Trate = rate
     
@@ -160,7 +158,7 @@ class QDTemperature(Parameter):
 
 class QDTemperatureStatus(Parameter):
     """
-    Parameter class for the temperature status
+    Parameter class for the temperature
     """
     def __init__(
         self,
@@ -170,14 +168,15 @@ class QDTemperatureStatus(Parameter):
     ) -> None:
         super().__init__(name, instrument=instrument, **kwargs)
 
-    def get_raw(self) -> str:
-        """Returns the temperature status"""
-        return self.instrument.get_temperature()[2]
+    def get_raw(self) -> float:
+        """Returns the temperature"""
+        return int(self.instrument.get_temperature()[2])
+
 
 
 class QDField(Parameter):
     """
-    Parameter class for the temperature
+    Parameter class for the field
     """
     def __init__(
         self,
@@ -198,7 +197,7 @@ class QDField(Parameter):
 
 class QDFieldStatus(Parameter):
     """
-    Parameter class for the magnetic field status
+    Parameter class for the field status
     """
     def __init__(
         self,
@@ -208,6 +207,6 @@ class QDFieldStatus(Parameter):
     ) -> None:
         super().__init__(name, instrument=instrument, **kwargs)
 
-    def get_raw(self) -> str:
-        """Returns the magnetic field status"""
-        return self.instrument.get_field()[2]
+    def get_raw(self) -> float:
+        """Returns the magnetic field"""
+        return int(self.instrument.get_field()[2])
