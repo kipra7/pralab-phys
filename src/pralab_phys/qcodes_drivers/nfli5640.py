@@ -64,7 +64,7 @@ class nfLI5640(VisaInstrument):
         return (x, y)
 
 
-class nfLI5640GetData(Instrument):
+class nfLI5640GetData(Parameter):
 
     def __init__(
         self,
@@ -80,7 +80,7 @@ class nfLI5640GetData(Instrument):
         return math.sqrt(x**2 + y**2)
 
 
-class nfLI5640GetDataX(Instrument):
+class nfLI5640GetDataX(Parameter):
 
     def __init__(
         self,
@@ -96,7 +96,7 @@ class nfLI5640GetDataX(Instrument):
         return x
     
 
-class nfLI5640GetDataY(Instrument):
+class nfLI5640GetDataY(Parameter):
 
     def __init__(
         self,
