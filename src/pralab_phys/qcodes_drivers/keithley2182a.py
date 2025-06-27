@@ -1,7 +1,5 @@
 # most of the drivers only need a couple of these... moved all up here for clarity below
-import sys
-import time
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing_extensions import (
@@ -10,7 +8,6 @@ if TYPE_CHECKING:
 
 from qcodes import validators as vals
 from qcodes.instrument import (
-    InstrumentChannel,
     VisaInstrument,
     VisaInstrumentKWArgs,
 )
@@ -18,37 +15,13 @@ from qcodes.parameters import Parameter
 from qcodes.validators import Enum, Numbers
 
 
-class Keithley2182Achannel(InstrumentChannel):
-
-    """A single channel of the Keithley2182A"""
-    def __init__(
-        self,
-        parent: Instrument,
-        name: str,
-        channel: str,
-        **kwargs: "Unpack[InstrumentBaseKWArgs]",
-    ) -> None:
-
-        """
-        Args:
-            parent: The Instrument instance to which the channel is
-                to be attached.
-            name: The 'colloquial' name of the channel
-            channel: The name used by the Keithley, i.e. either
-                'smua' or 'smub'
-            **kwargs: Forwarded to base class.
-        """
-
-        super().__init__(parent, name, **kwargs)
-        self.model = self._parent.model
+class Keithley2182AChannnel
 
 
 
-
-
-
-class Keithley2182A(VisaInstrument):
-    """Instrument Driver for Keithley2182A (1 channel, Voltage only)
+class Keithley2182A1ch(VisaInstrument):
+    """
+    Instrument Driver for Keithley2182A (1 channel, Voltage only)
 
     Attributes:
         nplc (Parameter): Set or get the number of power line cycles (min=0.01, max=50)
@@ -58,6 +31,7 @@ class Keithley2182A(VisaInstrument):
         active (Parameter): Set or get the active function. (VOLT or TEMP)
         filter (Parameter): Enables or disables the digital filter for measurements.
         amplitude (Parameter): Get the voltage (unit: V)
+
     """
     def __init__(
         self,
@@ -67,8 +41,6 @@ class Keithley2182A(VisaInstrument):
         **kwargs: "Unpack[VisaInstrumentKWArgs]",
     ):
 
-        """initial
-        """
         super().__init__(name, address, **kwargs)
 
         self._trigger_sent = False
@@ -116,7 +88,3 @@ class Keithley2182A(VisaInstrument):
         )
 
         self.get = self.amplitude
-
-        
-
-

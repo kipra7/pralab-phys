@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pralab_phys.ezgraph.ezgraph_2d &mdash; pralab_phys  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            pralab_phys
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.html">pralab_phys package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.analysis.html">pralab_phys.analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.ezgraph.html">pralab_phys.ezgraph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.eztools.html">pralab_phys.eztools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.qcodes_drivers.html">pralab_phys.qcodes_drivers package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pralab_phys</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pralab_phys.ezgraph.ezgraph_2d</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pralab_phys.ezgraph.ezgraph_2d</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<div class="viewcode-block" id="EZGraph">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">EZGraph</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;2次元グラフを描画するためのクラス</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dispname (str): グラフの表示名</span>
+<span class="sd">        xax_title (str): x軸のタイトル</span>
+<span class="sd">        yax_title (str): y軸のタイトル</span>
+<span class="sd">        width (int): グラフの幅</span>
+<span class="sd">        height (int): グラフの高さ</span>
+<span class="sd">        namedisplay (bool): グラフの表示名を表示するかどうか</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">dispname</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">xax_title</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">yax_title</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span> 
+        <span class="n">height</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+        <span class="n">namedisplay</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># plotly側の設定により、最初にアンダーバーを入れないとエラーを吐く</span>
+        <span class="c1"># 修正を要検討</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dispname</span> <span class="o">=</span> <span class="n">dispname</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">namedisplay</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dispname</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dispname</span><span class="p">,</span> <span class="n">font</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">),</span>
+            <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">xanchor</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">yanchor</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.82</span><span class="p">),</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> 
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+            <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="n">xax_title</span><span class="p">),</span>
+            <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="n">yax_title</span><span class="p">),</span>
+            <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+            <span class="n">showline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mirror</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">tickfont_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">title_font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">24</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span>
+            <span class="n">ticks</span><span class="o">=</span><span class="s1">&#39;inside&#39;</span><span class="p">,</span>
+            <span class="n">ticklen</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">tickwidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">tickcolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+            <span class="n">showline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mirror</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">tickfont_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">title_font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">24</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span>
+            <span class="n">ticks</span><span class="o">=</span><span class="s1">&#39;inside&#39;</span><span class="p">,</span>
+            <span class="n">ticklen</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">tickwidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">tickcolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span>
+            <span class="p">)</span>
+    
+<div class="viewcode-block" id="EZGraph.add_graph">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.add_graph">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;lines+markers&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;グラフを追加する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xdata (): _description_</span>
+<span class="sd">            ydata (_type_): _description_</span>
+<span class="sd">            name (str, optional): _description_. Defaults to &quot;&quot;.</span>
+<span class="sd">            mode (str, optional): _description_. Defaults to &quot;lines+markers&quot;.</span>
+<span class="sd">            color (_type_, optional): _description_. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xdata</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ydata</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">),</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="EZGraph.add_markers">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.add_markers">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_markers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">7</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;マーカーを追加する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (_type_): _description_</span>
+<span class="sd">            y (_type_): _description_</span>
+<span class="sd">            name (str, optional): _description_. Defaults to &quot;&quot;.</span>
+<span class="sd">            color (_type_, optional): _description_. Defaults to None.</span>
+<span class="sd">            size (int, optional): _description_. Defaults to 7.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="EZGraph.add_line">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.add_line">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;線を追加する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (_type_): _description_</span>
+<span class="sd">            y (_type_): _description_</span>
+<span class="sd">            name (str, optional): _description_. Defaults to &quot;&quot;.</span>
+<span class="sd">            color (_type_, optional): _description_. Defaults to None.</span>
+<span class="sd">            width (float, optional): _description_. Defaults to 3.5.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EZGraph.logx">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.logx">[docs]</a>
+    <span class="k">def</span> <span class="nf">logx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;x軸を対数軸にする</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="EZGraph.logy">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.logy">[docs]</a>
+    <span class="k">def</span> <span class="nf">logy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;y軸を対数軸にする</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EZGraph.legand_loc">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.legand_loc">[docs]</a>
+    <span class="k">def</span> <span class="nf">legand_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">1.02</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;凡例の位置を設定する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (float, optional): . Defaults to 1.02.</span>
+<span class="sd">            y (int, optional): _description_. Defaults to 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="EZGraph.title_loc">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.title_loc">[docs]</a>
+    <span class="k">def</span> <span class="nf">title_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">))</span></div>
+
+    
+<div class="viewcode-block" id="EZGraph.print_methods">
+<a class="viewcode-back" href="../../../pralab_phys.ezgraph.html#pralab_phys.ezgraph.ezgraph_2d.EZGraph.print_methods">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">([</span><span class="n">method</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)])</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Author.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

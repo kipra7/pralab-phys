@@ -18,7 +18,7 @@ from qcodes.validators import Enum, Ints, MultiType, Numbers
 class Keithley6221(VisaInstrument):
     """Instrument Driver for Keithley6221"""
 
-    default_terminator = "\r\n"
+    default_terminator = "\n"
 
     def __init__(
         self,
@@ -80,16 +80,16 @@ class Keithley6221(VisaInstrument):
 
         self.wave_amplitude: Parameter = self.add_parameter(
             "wave_amplitude",
-            get_cmd="SOUR:WAVE:FUNC?",
-            set_cmd="SOUR:WAVE:FUNC {}",
+            get_cmd="SOUR:WAVE:AMPL?",
+            set_cmd="SOUR:WAVE:AMPL {}",
             vals=Numbers(min_value=2e-12, max_value=0.105),
             unit="A"
         )
 
         self.wave_frec: Parameter = self.add_parameter(
             "wave_frec",
-            get_cmd="SOUR:WAVE:FUNC?",
-            set_cmd="SOUR:WAVE:FUNC {}",
+            get_cmd="SOUR:WAVE:FREQ?",
+            set_cmd="SOUR:WAVE:FREQ {}",
             vals=Numbers(min_value=1e-3, max_value=1e5),
             unit="Hz"
         )
@@ -100,6 +100,27 @@ class Keithley6221(VisaInstrument):
             set_cmd="SOUR:WAVE:OFFS {}",
             vals=Numbers(min_value=-105e-3, max_value=105e-3),
             unit="A"
+        )
+
+        self.wave_use_phasemarker: Parameter = self.add_parameter(
+            "wave_use_phasemarker",
+            get_cmd="SOUR:WAVE:PMAR:STAT?",
+            set_cmd="SOUR:WAVE:PMAR:STAT {}",
+            vals=Enum("0", "1")
+        )
+
+        self.wave_phasemarker_phase: Parameter = self.add_parameter(
+            "wave_phasemarker_phase",
+            get_cmd="SOUR:WAVE:PMAR?",
+            set_cmd="SOUR:WAVE:PMAR {}",
+            vals=Numbers(min_value=-180, max_value=180),
+    )
+        
+        self.wave_phasemarker_line: Parameter = self.add_parameter(
+            "wave_phasemarker_line",
+            get_cmd="SOUR:WAVE:PMAR:OLIN?",
+            set_cmd="SOUR:WAVE:PMAR:OLIN {}",
+            vals=Enum(1, 2, 3, 4, 5, 6),
         )
 
     def waveform_arm(self):
@@ -122,3 +143,5 @@ class Keithley6221(VisaInstrument):
     
     def off(self):
         self.write("OUTPUT OFF")
+
+    

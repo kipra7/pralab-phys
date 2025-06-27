@@ -3,3 +3,4 @@
 
 from .ezgraph_2d import EZGraph
 from .ipygraph import EZGraphDisplay
+from .realtimeplot import RealTimePlot
