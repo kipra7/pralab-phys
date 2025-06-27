@@ -9,6 +9,7 @@ QDInstrument.dll
 exps/
 tutorials/
 test_code.py
+test_code.ipynb
 
 # markdown editor & mac
 .obsidian

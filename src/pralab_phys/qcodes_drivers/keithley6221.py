@@ -143,3 +143,5 @@ class Keithley6221(VisaInstrument):
     
     def off(self):
         self.write("OUTPUT OFF")
+
+    

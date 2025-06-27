@@ -55,7 +55,7 @@ class EZGraph(go.Figure):
             tickcolor='grey'
             )
     
-    def add_graph(
+    def add_lines_markers(
         self,
         xdata: Collection, 
         ydata: Collection, 
