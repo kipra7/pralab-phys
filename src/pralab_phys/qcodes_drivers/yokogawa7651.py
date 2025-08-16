@@ -1,7 +1,3 @@
-# Reference: https://github.com/QCoherence/QCodes-drivers/blob/master/Yokogawa_7651.py
-
-# Last updated on 30 Oct 2020
-#                     -- Arpit
 from functools import partial
 from qcodes import (VisaInstrument,
 					validators as vals)
@@ -98,17 +94,10 @@ class Yokogawa7651(VisaInstrument):
 			name = 'current_range',  
 			label = 'Set output current range in mA',
 			vals = vals.Enum(1,10,100),
-			unit   = 'mA',
+			unit   = 'A',
 			set_cmd = partial(self._set_range, mode = "CURR"),
 			get_cmd = None
 			)
-
-		self.auto_range: Parameter = self.add_parameter(
-			"auto_range", 
-			label="Auto Range", 
-			set_cmd=self._set_auto_range, 
-			get_cmd=None, 
-			initial_cache_value=False)
 
 		self.voltage_limit: Parameter = self.add_parameter(
 			name = 'voltage_limit',  
@@ -123,7 +112,7 @@ class Yokogawa7651(VisaInstrument):
 			name = 'current_limit',
 			label = 'Set output current limit in mA',
 			vals = vals.Numbers(5,120),
-			unit   = 'mA',
+			unit   = 'A',
 			set_parser = int,
 			set_cmd = 'LA'+'{}')
 
@@ -153,6 +142,7 @@ class Yokogawa7651(VisaInstrument):
 			return "VOLT"
 		elif "F5R" in status:
 			return "CURR"
+    
 	def _get_range(self, status:str) -> int:
 		if "F1R" in status:
 			if "R2" in status:
@@ -201,7 +191,7 @@ class Yokogawa7651(VisaInstrument):
 			polarity = '+'
 		else:
 			polarity = '-'
-		self.write('F1SA'+polarity+str(round(abs(voltage)/1000.,6))+'E')
+		self.write('F1SA'+polarity+str(round(abs(voltage),6))+'E')
 
 	def _set_A(self,current):
 		self._status['mode'] = 'Current'
@@ -210,7 +200,7 @@ class Yokogawa7651(VisaInstrument):
 			polarity = '+'
 		else:
 			polarity = '-'
-		self.write('F5SA'+polarity+str(round(abs(current)/1000.,6))+'E')
+		self.write('F5SA'+polarity+str(round(abs(current),6))+'E')
 
 	def initialize(self):
 		self.write('RC')
@@ -272,6 +262,3 @@ class Y7651Mode(Parameter):
 			self.instrument.write('F1E')
 		elif value == "Current":
 			self.instrument.write('F5E')
-
-
-
