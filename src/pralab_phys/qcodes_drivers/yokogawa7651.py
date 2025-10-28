@@ -65,14 +65,14 @@ class Yokogawa7651(VisaInstrument):
             name="current",
             parameter_class=Y7651AutoCurrent,
             label="current",
-            unit="mA",
+            unit="A",
         )
 
 		self.auto_voltage: Parameter = self.add_parameter(
 			name="voltage",
 			parameter_class=Y7651AutoVoltage,
 			label="voltage",
-			unit="mV",
+			unit="V",
 		)
 
 		self.mode: Parameter = self.add_parameter(

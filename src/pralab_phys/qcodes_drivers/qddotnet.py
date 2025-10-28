@@ -1,9 +1,9 @@
-import sys
 import clr
+from qcodes.parameters import Parameter
+from qcodes.instrument.base import Instrument
+clr.AddReference("System")
 from System import Double, UInt16, Int32
 
-from qcodes.instrument.parameter import Parameter
-from qcodes.instrument.base import Instrument
 
 # add .net reference and import so python can see .net
 
@@ -39,6 +39,7 @@ class QDdotNET(Instrument):
         
         self.Brate = 100
         self.Trate = 10
+        self.prate = 10
         self.minimim_temperature = 1.8
 
         self.temperature: Parameter = self.add_parameter(
@@ -74,6 +75,37 @@ class QDdotNET(Instrument):
             unit = "deg"
         )
 
+        self.positionstatus: Parameter = self.add_parameter(
+            name = "positionstatus",
+            parameter_class = QDPositionStatus,
+            label = "positionstatus",
+        )
+
+        self.fieldrate: Parameter = self.add_parameter(
+            name = "fieldrate",
+            label = "fieldrate",
+            unit = "Oe/s",
+            get_cmd = lambda: self.Brate,
+            set_cmd = self._set_b_rate,
+        )
+
+        self.temperaturerate: Parameter = self.add_parameter(
+            name = "temperaturerate",
+            label = "temperaturerate",
+            unit = "K/s",
+            get_cmd = lambda: self.Trate,
+            set_cmd = self._set_t_rate,
+        )
+
+        self.positionrate: Parameter = self.add_parameter(
+            name = "positionrate",
+            label = "positionrate",
+            unit = "deg/s",
+            get_cmd = lambda: self.prate,
+            set_cmd = self._set_p_rate,
+        )
+
+
     def get_field(self):
         return self.device.GetField(Double(0), self.QDIBase.FieldStatus(Int32(0)))
     
@@ -84,10 +116,11 @@ class QDdotNET(Instrument):
             raise RuntimeError("Field is out of bounds. Should be between -90000 and 90000 Oe")
 
     def get_position(self):
-        return float(str(self.device.GetPosition("Horizontal Rotator", 0, 0)))
-    
+        error, position, status = self.device.GetPosition("Horizontal Rotator", Double(0), self.QDIBase.PositionStatus(Int32(0)))
+        return (error, position, status)
+
     def set_position(self, position):
-        return self.device.SetPosition("Horizontal Rotator", position, 0, 0)
+        return self.device.SetPosition("Horizontal Rotator", Double(position), self.prate, self.QDIBase.PositionMode(Int32(0)))
 
     def set_temperature(self, temp):
         if self.minimim_temperature <= temp <= 350:
@@ -99,11 +132,14 @@ class QDdotNET(Instrument):
         error, temperature, status = self.device.GetTemperature(Double(0), self.QDIBase.TemperatureStatus(Int32(0)))
         return (error, temperature, status)
 
-    def set_t_rate(self, rate: float):
+    def _set_t_rate(self, rate: float):
         self.Trate = rate
     
-    def set_b_rate(self, rate: float):
+    def _set_b_rate(self, rate: float):
         self.Brate = rate
+
+    def _set_p_rate(self, rate: float):
+        self.prate = rate
 
     def get_idn(self):
         return {
@@ -132,7 +168,24 @@ class QDPosition(Parameter):
 
     def get_raw(self) -> float:
         """Returns the motor position"""
-        return self.instrument.get_position()
+        return self.instrument.get_position()[1]
+    
+
+class QDPositionStatus(Parameter):
+    """
+    Parameter class for the motor position status
+    """
+    def __init__(
+        self,
+        name: str,
+        instrument: QDdotNET,
+        **kwargs,
+    ) -> None:
+        super().__init__(name, instrument=instrument, **kwargs)
+
+    def get_raw(self) -> float:
+        """Returns the motor position status"""
+        return int(self.instrument.get_position()[2])
 
 
 class QDTemperature(Parameter):
@@ -171,7 +224,6 @@ class QDTemperatureStatus(Parameter):
     def get_raw(self) -> float:
         """Returns the temperature"""
         return int(self.instrument.get_temperature()[2])
-
 
 
 class QDField(Parameter):
