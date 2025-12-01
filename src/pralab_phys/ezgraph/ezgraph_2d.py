@@ -1,3 +1,31 @@
+"""
+EZGraph is a class for creating and customizing 2D graphs using Plotly.
+
+Attributes:
+    _dispname (str): The display name of the graph.
+    xax_title (str): Title for the x-axis.
+    yax_title (str): Title for the y-axis.
+    width (int): Width of the graph.
+    height (int): Height of the graph.
+
+Methods:
+    add_lines_markers(xdata, ydata, name, mode, color):
+        Adds a graph with lines and markers to the figure.
+    add_markers(x, y, name, color, size):
+        Adds markers to the figure.
+    add_line(x, y, name, color, width):
+        Adds a line to the figure.
+    logx():
+        Sets the x-axis to logarithmic scale.
+    logy():
+        Sets the y-axis to logarithmic scale.
+    legand_loc(x, y):
+        Sets the legend location.
+    title_loc(y):
+        Sets the title location.
+    print_methods():
+        Prints all callable methods of the class.
+"""
 import plotly.graph_objects as go
 from collections.abc import Collection
 

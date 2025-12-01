@@ -1,3 +1,32 @@
+"""
+LI5650 is a QCoDeS driver for the Stanford Research Systems NF Lock-in Amplifier.
+
+Attributes:
+    phase (Parameter): Phase of the signal in degrees.
+    frequency (Parameter): Frequency of the signal in Hz.
+    amplitude (Parameter): Amplitude of the signal in V.
+    x_offset (Parameter): X-axis offset in percentage.
+    y_offset (Parameter): Y-axis offset in percentage.
+    reference (Parameter): Reference signal source.
+    time_constant (Parameter): Time constant of the filter in seconds.
+    input_gain (Parameter): Input gain in Ohms.
+    source_frequency (Parameter): Source frequency in Hz.
+    filter_slope (Parameter): Filter slope in dB/octave.
+    ac_sensitivity (Parameter): Current sensitivity in A.
+    v_sensitivity (Parameter): Voltage sensitivity in V.
+    offset_status_x (Parameter): Status of X-axis offset (ON/OFF).
+    offset_status_y (Parameter): Status of Y-axis offset (ON/OFF).
+
+Methods:
+    auto_all(): Automatically adjusts all settings.
+    auto_phase(): Automatically adjusts the phase.
+    auto_offset(): Automatically adjusts the offset.
+    auto_time_constant(): Automatically adjusts the time constant.
+    auto_sensitivity(): Automatically adjusts the sensitivity.
+    reset(): Resets the instrument.
+    disable_front_panel(): Disables the front panel.
+    enable_front_panel(): Enables the front panel.
+"""
 from functools import partial
 import numpy as np
 from typing import Any
