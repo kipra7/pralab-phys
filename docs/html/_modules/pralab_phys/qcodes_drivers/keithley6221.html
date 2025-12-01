@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pralab_phys.qcodes_drivers.keithley6221 &mdash; pralab_phys  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
@@ -39,8 +39,15 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.html">pralab_phys package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.analysis.html">pralab_phys.analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.ezgraph.html">pralab_phys.ezgraph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.eztools.html">pralab_phys.eztools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pralab_phys.qcodes_drivers.html">pralab_phys.qcodes_drivers package</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -67,30 +74,30 @@
              
   <h1>Source code for pralab_phys.qcodes_drivers.keithley6221</h1><div class="highlight"><pre>
 <span></span><span class="c1"># most of the drivers only need a couple of these... moved all up here for clarity below</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
         <span class="n">Unpack</span><span class="p">,</span>  <span class="c1"># can be imported from typing if python &gt;= 3.12</span>
     <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">qcodes</span> <span class="kn">import</span> <span class="n">validators</span> <span class="k">as</span> <span class="n">vals</span>
-<span class="kn">from</span> <span class="nn">qcodes.instrument</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qcodes</span><span class="w"> </span><span class="kn">import</span> <span class="n">validators</span> <span class="k">as</span> <span class="n">vals</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qcodes.instrument</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Instrument</span><span class="p">,</span>
     <span class="n">VisaInstrument</span><span class="p">,</span>
     <span class="n">VisaInstrumentKWArgs</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">qcodes.parameters</span> <span class="kn">import</span> <span class="n">Parameter</span>
-<span class="kn">from</span> <span class="nn">qcodes.validators</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">Ints</span><span class="p">,</span> <span class="n">MultiType</span><span class="p">,</span> <span class="n">Numbers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qcodes.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qcodes.validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">Ints</span><span class="p">,</span> <span class="n">MultiType</span><span class="p">,</span> <span class="n">Numbers</span>
 
 <div class="viewcode-block" id="Keithley6221">
 <a class="viewcode-back" href="../../../pralab_phys.qcodes_drivers.html#pralab_phys.qcodes_drivers.keithley6221.Keithley6221">[docs]</a>
-<span class="k">class</span> <span class="nc">Keithley6221</span><span class="p">(</span><span class="n">VisaInstrument</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Keithley6221</span><span class="p">(</span><span class="n">VisaInstrument</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instrument Driver for Keithley6221&quot;&quot;&quot;</span>
 
-    <span class="n">default_terminator</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+    <span class="n">default_terminator</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -150,16 +157,16 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">wave_amplitude</span><span class="p">:</span> <span class="n">Parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span>
             <span class="s2">&quot;wave_amplitude&quot;</span><span class="p">,</span>
-            <span class="n">get_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:FUNC?&quot;</span><span class="p">,</span>
-            <span class="n">set_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:FUNC </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">get_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:AMPL?&quot;</span><span class="p">,</span>
+            <span class="n">set_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:AMPL </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="n">vals</span><span class="o">=</span><span class="n">Numbers</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">2e-12</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">0.105</span><span class="p">),</span>
             <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">wave_frec</span><span class="p">:</span> <span class="n">Parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span>
             <span class="s2">&quot;wave_frec&quot;</span><span class="p">,</span>
-            <span class="n">get_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:FUNC?&quot;</span><span class="p">,</span>
-            <span class="n">set_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:FUNC </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">get_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:FREQ?&quot;</span><span class="p">,</span>
+            <span class="n">set_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:FREQ </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="n">vals</span><span class="o">=</span><span class="n">Numbers</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">1e5</span><span class="p">),</span>
             <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;Hz&quot;</span>
         <span class="p">)</span>
@@ -172,45 +179,68 @@
             <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
         <span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_use_phasemarker</span><span class="p">:</span> <span class="n">Parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span>
+            <span class="s2">&quot;wave_use_phasemarker&quot;</span><span class="p">,</span>
+            <span class="n">get_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:PMAR:STAT?&quot;</span><span class="p">,</span>
+            <span class="n">set_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:PMAR:STAT </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">vals</span><span class="o">=</span><span class="n">Enum</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_phasemarker_phase</span><span class="p">:</span> <span class="n">Parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span>
+            <span class="s2">&quot;wave_phasemarker_phase&quot;</span><span class="p">,</span>
+            <span class="n">get_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:PMAR?&quot;</span><span class="p">,</span>
+            <span class="n">set_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:PMAR </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">vals</span><span class="o">=</span><span class="n">Numbers</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">180</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">180</span><span class="p">),</span>
+    <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">wave_phasemarker_line</span><span class="p">:</span> <span class="n">Parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span>
+            <span class="s2">&quot;wave_phasemarker_line&quot;</span><span class="p">,</span>
+            <span class="n">get_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:PMAR:OLIN?&quot;</span><span class="p">,</span>
+            <span class="n">set_cmd</span><span class="o">=</span><span class="s2">&quot;SOUR:WAVE:PMAR:OLIN </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">vals</span><span class="o">=</span><span class="n">Enum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">)</span>
+
 <div class="viewcode-block" id="Keithley6221.waveform_arm">
 <a class="viewcode-back" href="../../../pralab_phys.qcodes_drivers.html#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_arm">[docs]</a>
-    <span class="k">def</span> <span class="nf">waveform_arm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">waveform_arm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Arm the current waveform function. &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;SOUR:WAVE:ARM&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Keithley6221.waveform_start">
 <a class="viewcode-back" href="../../../pralab_phys.qcodes_drivers.html#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_start">[docs]</a>
-    <span class="k">def</span> <span class="nf">waveform_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">waveform_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Start the waveform output. Must already be armed &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;SOUR:WAVE:INIT&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Keithley6221.waveform_abort">
 <a class="viewcode-back" href="../../../pralab_phys.qcodes_drivers.html#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.waveform_abort">[docs]</a>
-    <span class="k">def</span> <span class="nf">waveform_abort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">waveform_abort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Abort the waveform output and disarm the waveform function. &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;SOUR:WAVE:ABOR&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Keithley6221.clear">
 <a class="viewcode-back" href="../../../pralab_phys.qcodes_drivers.html#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.clear">[docs]</a>
-    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;SOUR:CLE:IMM&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Keithley6221.on">
 <a class="viewcode-back" href="../../../pralab_phys.qcodes_drivers.html#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.on">[docs]</a>
-    <span class="k">def</span> <span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;OUTPUT ON&quot;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="Keithley6221.off">
 <a class="viewcode-back" href="../../../pralab_phys.qcodes_drivers.html#pralab_phys.qcodes_drivers.keithley6221.Keithley6221.off">[docs]</a>
-    <span class="k">def</span> <span class="nf">off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;OUTPUT OFF&quot;</span><span class="p">)</span></div>
 </div>
 
+
+    
 </pre></div>
 
            </div>

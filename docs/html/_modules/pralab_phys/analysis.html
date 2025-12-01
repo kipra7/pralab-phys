@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pralab_phys.analysis &mdash; pralab_phys  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
@@ -73,31 +73,33 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pralab_phys.analysis</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Collection</span>
-<span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Real</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numbers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Real</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 
 <div class="viewcode-block" id="critical_current">
 <a class="viewcode-back" href="../../pralab_phys.analysis.html#pralab_phys.analysis.critical_current">[docs]</a>
-<span class="k">def</span> <span class="nf">critical_current</span><span class="p">(</span><span class="n">current</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">voltage</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Real</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">critical_current</span><span class="p">(</span><span class="n">current</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">resistance</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Real</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate the critical current from a current-voltage curve.</span>
+<span class="sd">    Calculate the critical current from a current-resistance curve.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        current: The current values.</span>
-<span class="sd">        voltage: The voltage values.</span>
-<span class="sd">        threshold: The threshold voltage. If None, the threshold is calculated as the maximum voltage divided by 2.</span>
+<span class="sd">        resistance: The resistance values.</span>
+<span class="sd">        threshold: The threshold resistance. If None, the threshold is calculated as the maximum resistance divided by 2.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        The critical current.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">voltage</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The current and voltage arrays must have the same length.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resistance</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The current and resistance arrays must have the same length.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">threshold</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">voltage</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">resistance</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">voltage</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">resistance</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">current</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
@@ -107,7 +109,7 @@
 
 <div class="viewcode-block" id="critical_temperature">
 <a class="viewcode-back" href="../../pralab_phys.analysis.html#pralab_phys.analysis.critical_temperature">[docs]</a>
-<span class="k">def</span> <span class="nf">critical_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">resistance</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Real</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">critical_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">resistance</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Real</span><span class="p">],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Real</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the critical temperature from a temperature-resistance curve.</span>
 
@@ -137,7 +139,7 @@
 
 <div class="viewcode-block" id="ic_to_jc">
 <a class="viewcode-back" href="../../pralab_phys.analysis.html#pralab_phys.analysis.ic_to_jc">[docs]</a>
-<span class="k">def</span> <span class="nf">ic_to_jc</span><span class="p">(</span><span class="n">ic</span><span class="p">:</span> <span class="n">Real</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="n">Real</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="n">Real</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ic_to_jc</span><span class="p">(</span><span class="n">ic</span><span class="p">:</span> <span class="n">Real</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="n">Real</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="n">Real</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the critical current density from the critical current.</span>
 
@@ -153,6 +155,33 @@
     <span class="c1"># kA/cm^2 = (10^-3 A)/(10^2 m)^2 = (10^-6 mA)/(10^-7 cm)^2</span>
 
     <span class="k">return</span> <span class="n">ic</span> <span class="o">/</span> <span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># kA/cm^2</span></div>
+
+
+
+<div class="viewcode-block" id="xnn_to_dataframe">
+<a class="viewcode-back" href="../../pralab_phys.analysis.html#pralab_phys.analysis.xnn_to_dataframe">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">xnn_to_dataframe</span><span class="p">(</span><span class="n">xnn_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert an XNN file to a pandas DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xnn_path: The path to the XNN file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The DataFrame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">xnn_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())))</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 </pre></div>
 

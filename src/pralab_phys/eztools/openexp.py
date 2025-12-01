@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 
 from typing import Union
+import time
 
 
 def openpath(multichoice:bool = False) -> Union[str, tuple[str, ...]]:
@@ -42,3 +43,14 @@ def opendir() -> str:
     root.destroy()
     return directory
 
+
+def opendir_safety() -> str:
+    """It returns a directory path that you select on filedialog.
+
+    Returns:
+        str: a directory path
+    """
+    # tk.Tk() インスタンスの作成と管理をすべて削除します。
+    # filedialog.askdirectory() が暗黙的にウィンドウを処理します。
+    directory = filedialog.askdirectory()
+    return directory

@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pralab_phys.analysis package &mdash; pralab_phys  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
@@ -63,6 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pralab_phys.analysis.critical_current"><code class="docutils literal notranslate"><span class="pre">critical_current()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pralab_phys.analysis.critical_temperature"><code class="docutils literal notranslate"><span class="pre">critical_temperature()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pralab_phys.analysis.ic_to_jc"><code class="docutils literal notranslate"><span class="pre">ic_to_jc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pralab_phys.analysis.xnn_to_dataframe"><code class="docutils literal notranslate"><span class="pre">xnn_to_dataframe()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -103,12 +104,12 @@
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pralab_phys.analysis" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pralab_phys.analysis.critical_current">
-<span class="sig-prename descclassname"><span class="pre">pralab_phys.analysis.</span></span><span class="sig-name descname"><span class="pre">critical_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">Real</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voltage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">Real</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Real</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pralab_phys/analysis.html#critical_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.analysis.critical_current" title="Link to this definition"></a></dt>
-<dd><p>Calculate the critical current from a current-voltage curve.</p>
+<span class="sig-prename descclassname"><span class="pre">pralab_phys.analysis.</span></span><span class="sig-name descname"><span class="pre">critical_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">Real</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resistance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">Real</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Real</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pralab_phys/analysis.html#critical_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.analysis.critical_current" title="Link to this definition"></a></dt>
+<dd><p>Calculate the critical current from a current-resistance curve.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>current: The current values.
-voltage: The voltage values.
-threshold: The threshold voltage. If None, the threshold is calculated as the maximum voltage divided by 2.</p>
+resistance: The resistance values.
+threshold: The threshold resistance. If None, the threshold is calculated as the maximum resistance divided by 2.</p>
 </dd>
 <dt>Returns:</dt><dd><p>The critical current.</p>
 </dd>
@@ -139,6 +140,18 @@ width: The width of the wire. (nm)
 height: The height of the wire. (nm)</p>
 </dd>
 <dt>Returns:</dt><dd><p>The critical current density. (kA/cm^2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pralab_phys.analysis.xnn_to_dataframe">
+<span class="sig-prename descclassname"><span class="pre">pralab_phys.analysis.</span></span><span class="sig-name descname"><span class="pre">xnn_to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xnn_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/pralab_phys/analysis.html#xnn_to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.analysis.xnn_to_dataframe" title="Link to this definition"></a></dt>
+<dd><p>Convert an XNN file to a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>xnn_path: The path to the XNN file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>The DataFrame.</p>
 </dd>
 </dl>
 </dd></dl>

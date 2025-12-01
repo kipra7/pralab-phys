@@ -3,7 +3,7 @@ import numpy as np
 from typing import Any
 
 from qcodes import VisaInstrument
-from qcodes.instrument.parameter import ArrayParameter, ParamRawDataType
+from qcodes.parameters import ArrayParameter, ParamRawDataType
 from qcodes.utils.validators import Numbers, Ints, Enum, Strings
 
 from typing import Tuple
