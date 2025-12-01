@@ -1,3 +1,27 @@
+"""
+Keithley6221 is a QCoDeS driver for the Keithley 6221 AC and DC Current Source.
+
+Attributes:
+    output (Parameter): Output state (ON/OFF).
+    dc_amplitude (Parameter): DC current amplitude in A.
+    dc_compliance (Parameter): DC compliance voltage in V.
+    auto_range (Parameter): Auto range state (ON/OFF).
+    wave_func (Parameter): Waveform function type.
+    wave_amplitude (Parameter): Amplitude of the waveform in A.
+    wave_frec (Parameter): Frequency of the waveform in Hz.
+    wave_offset (Parameter): Offset of the waveform in A.
+    wave_use_phasemarker (Parameter): Phase marker usage state (ON/OFF).
+    wave_phasemarker_phase (Parameter): Phase of the phase marker in degrees.
+    wave_phasemarker_line (Parameter): Line number of the phase marker.
+
+Methods:
+    waveform_arm(): Arms the current waveform function.
+    waveform_start(): Starts the waveform output.
+    waveform_abort(): Aborts the waveform output.
+    clear(): Clears the source settings.
+    on(): Turns the output ON.
+    off(): Turns the output OFF.
+"""
 # most of the drivers only need a couple of these... moved all up here for clarity below
 from typing import TYPE_CHECKING, Any
 
@@ -143,5 +167,3 @@ class Keithley6221(VisaInstrument):
     
     def off(self):
         self.write("OUTPUT OFF")
-
-    

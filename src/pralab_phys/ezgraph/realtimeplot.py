@@ -1,3 +1,21 @@
+"""
+RealTimePlot is a class for real-time data visualization using Dash.
+
+Attributes:
+    x_label (str): Label for the x-axis.
+    y_label (str): Label for the y-axis.
+    x_data (list): List to store x-axis data.
+    y_data (list): List to store y-axis data.
+    app (dash.Dash): Dash application instance.
+
+Methods:
+    update_graph(n):
+        Updates the graph with the current data.
+    add(x, y):
+        Adds new data points to the graph.
+    run(debug):
+        Starts the Dash server for real-time visualization.
+"""
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output

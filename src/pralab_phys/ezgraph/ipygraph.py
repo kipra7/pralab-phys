@@ -1,3 +1,18 @@
+"""
+EZGraphDisplay is a class for interactive 2D graph visualization using Jupyter widgets.
+
+Attributes:
+    df (pd.DataFrame): The input DataFrame for visualization.
+    x_axis (ipywidgets.Select): Widget for selecting the x-axis column.
+    y_axis (ipywidgets.Select): Widget for selecting the y-axis column.
+    y_axis2 (ipywidgets.Select): Widget for selecting the secondary y-axis column.
+    width (ipywidgets.IntSlider): Widget for adjusting the graph width.
+    logx_checkbox (ipywidgets.Checkbox): Widget for enabling logarithmic x-axis.
+    logy_checkbox (ipywidgets.Checkbox): Widget for enabling logarithmic y-axis.
+
+Methods:
+    None
+"""
 import pandas as pd
 from ipywidgets import interact, Select, IntSlider, Checkbox
 
