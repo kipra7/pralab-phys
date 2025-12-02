@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
+    <link rel="canonical" href="https://7kipra.github.io/pralab_phys/_modules/pralab_phys/qcodes_drivers/keithley6221.html" />
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
@@ -73,7 +74,31 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pralab_phys.qcodes_drivers.keithley6221</h1><div class="highlight"><pre>
-<span></span><span class="c1"># most of the drivers only need a couple of these... moved all up here for clarity below</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Keithley6221 is a QCoDeS driver for the Keithley 6221 AC and DC Current Source.</span>
+
+<span class="sd">Attributes:</span>
+<span class="sd">    output (Parameter): Output state (ON/OFF).</span>
+<span class="sd">    dc_amplitude (Parameter): DC current amplitude in A.</span>
+<span class="sd">    dc_compliance (Parameter): DC compliance voltage in V.</span>
+<span class="sd">    auto_range (Parameter): Auto range state (ON/OFF).</span>
+<span class="sd">    wave_func (Parameter): Waveform function type.</span>
+<span class="sd">    wave_amplitude (Parameter): Amplitude of the waveform in A.</span>
+<span class="sd">    wave_frec (Parameter): Frequency of the waveform in Hz.</span>
+<span class="sd">    wave_offset (Parameter): Offset of the waveform in A.</span>
+<span class="sd">    wave_use_phasemarker (Parameter): Phase marker usage state (ON/OFF).</span>
+<span class="sd">    wave_phasemarker_phase (Parameter): Phase of the phase marker in degrees.</span>
+<span class="sd">    wave_phasemarker_line (Parameter): Line number of the phase marker.</span>
+
+<span class="sd">Methods:</span>
+<span class="sd">    waveform_arm(): Arms the current waveform function.</span>
+<span class="sd">    waveform_start(): Starts the waveform output.</span>
+<span class="sd">    waveform_abort(): Aborts the waveform output.</span>
+<span class="sd">    clear(): Clears the source settings.</span>
+<span class="sd">    on(): Turns the output ON.</span>
+<span class="sd">    off(): Turns the output OFF.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># most of the drivers only need a couple of these... moved all up here for clarity below</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -239,8 +264,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;OUTPUT OFF&quot;</span><span class="p">)</span></div>
 </div>
 
-
-    
 </pre></div>
 
            </div>

@@ -11,6 +11,7 @@
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
+    <link rel="canonical" href="https://7kipra.github.io/pralab_phys/pralab_phys.qcodes_drivers.html" />
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -104,7 +105,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode"><code class="docutils literal notranslate"><span class="pre">Y7651Mode</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode.get_raw"><code class="docutils literal notranslate"><span class="pre">Y7651Mode.get_raw()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode.set_raw"><code class="docutils literal notranslate"><span class="pre">Y7651Mode.set_raw()</span></code></a></li>
 </ul>
 </li>
@@ -244,6 +244,28 @@ amplitude (Parameter): Get the voltage (unit: V)</p>
 </section>
 <section id="module-pralab_phys.qcodes_drivers.keithley6221">
 <span id="pralab-phys-qcodes-drivers-keithley6221-module"></span><h2>pralab_phys.qcodes_drivers.keithley6221 module<a class="headerlink" href="#module-pralab_phys.qcodes_drivers.keithley6221" title="Link to this heading"></a></h2>
+<p>Keithley6221 is a QCoDeS driver for the Keithley 6221 AC and DC Current Source.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>output (Parameter): Output state (ON/OFF).
+dc_amplitude (Parameter): DC current amplitude in A.
+dc_compliance (Parameter): DC compliance voltage in V.
+auto_range (Parameter): Auto range state (ON/OFF).
+wave_func (Parameter): Waveform function type.
+wave_amplitude (Parameter): Amplitude of the waveform in A.
+wave_frec (Parameter): Frequency of the waveform in Hz.
+wave_offset (Parameter): Offset of the waveform in A.
+wave_use_phasemarker (Parameter): Phase marker usage state (ON/OFF).
+wave_phasemarker_phase (Parameter): Phase of the phase marker in degrees.
+wave_phasemarker_line (Parameter): Line number of the phase marker.</p>
+</dd>
+<dt>Methods:</dt><dd><p>waveform_arm(): Arms the current waveform function.
+waveform_start(): Starts the waveform output.
+waveform_abort(): Aborts the waveform output.
+clear(): Clears the source settings.
+on(): Turns the output ON.
+off(): Turns the output OFF.</p>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.keithley6221.Keithley6221">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.keithley6221.</span></span><span class="sig-name descname"><span class="pre">Keithley6221</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/keithley6221.html#Keithley6221"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.keithley6221.Keithley6221" title="Link to this definition"></a></dt>
@@ -358,17 +380,6 @@ provide a <code class="docutils literal notranslate"><span class="pre">set</span
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.qcodes_drivers.yokogawa7651.</span></span><span class="sig-name descname"><span class="pre">Y7651Mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651" title="pralab_phys.qcodes_drivers.yokogawa7651.Yokogawa7651"><span class="pre">Yokogawa7651</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Y7651Mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode.get_raw">
-<span class="sig-name descname"><span class="pre">get_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Y7651Mode.get_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode.get_raw" title="Link to this definition"></a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">get_raw</span></code> is called to perform the actual data acquisition from the
-instrument. This method should either be overwritten to perform the
-desired operation or alternatively for <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code> a
-suitable method is automatically generated if <code class="docutils literal notranslate"><span class="pre">get_cmd</span></code> is supplied
-to the parameter constructor. The method is automatically wrapped to
-provide a <code class="docutils literal notranslate"><span class="pre">get</span></code> method on the parameter instance.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode.set_raw">
 <span class="sig-name descname"><span class="pre">set_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/qcodes_drivers/yokogawa7651.html#Y7651Mode.set_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.qcodes_drivers.yokogawa7651.Y7651Mode.set_raw" title="Link to this definition"></a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">set_raw</span></code> is called to perform the actual setting of a parameter on
@@ -398,9 +409,9 @@ provide a <code class="docutils literal notranslate"><span class="pre">set</span
 </dd>
 <dt>current_limit (Parameter):</dt><dd><p>Set output current limit in mA.</p>
 </dd>
-<dt>voltage (Parameter):</dt><dd><p>Set output voltage in mV.</p>
+<dt>auto_voltage (Parameter):</dt><dd><p>Set output voltage in mV.</p>
 </dd>
-<dt>current (Parameter):</dt><dd><p>Set output current in mA.</p>
+<dt>auto_current (Parameter):</dt><dd><p>Set output current in mA.</p>
 </dd>
 <dt>output (Parameter):</dt><dd><p>Output Status. (“on”, “off”)</p>
 </dd>

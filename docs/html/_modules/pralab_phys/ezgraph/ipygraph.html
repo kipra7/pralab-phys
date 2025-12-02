@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
+    <link rel="canonical" href="https://7kipra.github.io/pralab_phys/_modules/pralab_phys/ezgraph/ipygraph.html" />
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
@@ -73,7 +74,22 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pralab_phys.ezgraph.ipygraph</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">EZGraphDisplay is a class for interactive 2D graph visualization using Jupyter widgets.</span>
+
+<span class="sd">Attributes:</span>
+<span class="sd">    df (pd.DataFrame): The input DataFrame for visualization.</span>
+<span class="sd">    x_axis (ipywidgets.Select): Widget for selecting the x-axis column.</span>
+<span class="sd">    y_axis (ipywidgets.Select): Widget for selecting the y-axis column.</span>
+<span class="sd">    y_axis2 (ipywidgets.Select): Widget for selecting the secondary y-axis column.</span>
+<span class="sd">    width (ipywidgets.IntSlider): Widget for adjusting the graph width.</span>
+<span class="sd">    logx_checkbox (ipywidgets.Checkbox): Widget for enabling logarithmic x-axis.</span>
+<span class="sd">    logy_checkbox (ipywidgets.Checkbox): Widget for enabling logarithmic y-axis.</span>
+
+<span class="sd">Methods:</span>
+<span class="sd">    None</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">Select</span><span class="p">,</span> <span class="n">IntSlider</span><span class="p">,</span> <span class="n">Checkbox</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.ezgraph_2d</span><span class="w"> </span><span class="kn">import</span> <span class="n">EZGraph</span>

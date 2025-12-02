@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
+    <link rel="canonical" href="https://7kipra.github.io/pralab_phys/_modules/pralab_phys/ezgraph/ezgraph_2d.html" />
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
@@ -73,7 +74,35 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pralab_phys.ezgraph.ezgraph_2d</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">EZGraph is a class for creating and customizing 2D graphs using Plotly.</span>
+
+<span class="sd">Attributes:</span>
+<span class="sd">    _dispname (str): The display name of the graph.</span>
+<span class="sd">    xax_title (str): Title for the x-axis.</span>
+<span class="sd">    yax_title (str): Title for the y-axis.</span>
+<span class="sd">    width (int): Width of the graph.</span>
+<span class="sd">    height (int): Height of the graph.</span>
+
+<span class="sd">Methods:</span>
+<span class="sd">    add_lines_markers(xdata, ydata, name, mode, color):</span>
+<span class="sd">        Adds a graph with lines and markers to the figure.</span>
+<span class="sd">    add_markers(x, y, name, color, size):</span>
+<span class="sd">        Adds markers to the figure.</span>
+<span class="sd">    add_line(x, y, name, color, width):</span>
+<span class="sd">        Adds a line to the figure.</span>
+<span class="sd">    logx():</span>
+<span class="sd">        Sets the x-axis to logarithmic scale.</span>
+<span class="sd">    logy():</span>
+<span class="sd">        Sets the y-axis to logarithmic scale.</span>
+<span class="sd">    legand_loc(x, y):</span>
+<span class="sd">        Sets the legend location.</span>
+<span class="sd">    title_loc(y):</span>
+<span class="sd">        Sets the title location.</span>
+<span class="sd">    print_methods():</span>
+<span class="sd">        Prints all callable methods of the class.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span>
 
 <div class="viewcode-block" id="EZGraph">
