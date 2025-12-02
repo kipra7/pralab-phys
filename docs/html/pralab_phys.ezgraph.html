@@ -11,6 +11,7 @@
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
+    <link rel="canonical" href="https://7kipra.github.io/pralab_phys/pralab_phys.ezgraph.html" />
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -121,6 +122,34 @@
 </section>
 <section id="module-pralab_phys.ezgraph.ezgraph_2d">
 <span id="pralab-phys-ezgraph-ezgraph-2d-module"></span><h2>pralab_phys.ezgraph.ezgraph_2d module<a class="headerlink" href="#module-pralab_phys.ezgraph.ezgraph_2d" title="Link to this heading"></a></h2>
+<p>EZGraph is a class for creating and customizing 2D graphs using Plotly.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>_dispname (str): The display name of the graph.
+xax_title (str): Title for the x-axis.
+yax_title (str): Title for the y-axis.
+width (int): Width of the graph.
+height (int): Height of the graph.</p>
+</dd>
+<dt>Methods:</dt><dd><dl class="simple">
+<dt>add_lines_markers(xdata, ydata, name, mode, color):</dt><dd><p>Adds a graph with lines and markers to the figure.</p>
+</dd>
+<dt>add_markers(x, y, name, color, size):</dt><dd><p>Adds markers to the figure.</p>
+</dd>
+<dt>add_line(x, y, name, color, width):</dt><dd><p>Adds a line to the figure.</p>
+</dd>
+<dt>logx():</dt><dd><p>Sets the x-axis to logarithmic scale.</p>
+</dd>
+<dt>logy():</dt><dd><p>Sets the y-axis to logarithmic scale.</p>
+</dd>
+<dt>legand_loc(x, y):</dt><dd><p>Sets the legend location.</p>
+</dd>
+<dt>title_loc(y):</dt><dd><p>Sets the title location.</p>
+</dd>
+<dt>print_methods():</dt><dd><p>Prints all callable methods of the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="pralab_phys.ezgraph.ezgraph_2d.EZGraph">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.ezgraph.ezgraph_2d.</span></span><span class="sig-name descname"><span class="pre">EZGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dispname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xax_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yax_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">900</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">600</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/ezgraph/ezgraph_2d.html#EZGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.ezgraph.ezgraph_2d.EZGraph" title="Link to this definition"></a></dt>
@@ -226,6 +255,19 @@ y (float, optional): _description_. Defaults to 1.</p>
 </section>
 <section id="module-pralab_phys.ezgraph.ipygraph">
 <span id="pralab-phys-ezgraph-ipygraph-module"></span><h2>pralab_phys.ezgraph.ipygraph module<a class="headerlink" href="#module-pralab_phys.ezgraph.ipygraph" title="Link to this heading"></a></h2>
+<p>EZGraphDisplay is a class for interactive 2D graph visualization using Jupyter widgets.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>df (pd.DataFrame): The input DataFrame for visualization.
+x_axis (ipywidgets.Select): Widget for selecting the x-axis column.
+y_axis (ipywidgets.Select): Widget for selecting the y-axis column.
+y_axis2 (ipywidgets.Select): Widget for selecting the secondary y-axis column.
+width (ipywidgets.IntSlider): Widget for adjusting the graph width.
+logx_checkbox (ipywidgets.Checkbox): Widget for enabling logarithmic x-axis.
+logy_checkbox (ipywidgets.Checkbox): Widget for enabling logarithmic y-axis.</p>
+</dd>
+<dt>Methods:</dt><dd><p>None</p>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="pralab_phys.ezgraph.ipygraph.EZGraphDisplay">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pralab_phys.ezgraph.ipygraph.</span></span><span class="sig-name descname"><span class="pre">EZGraphDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pralab_phys/ezgraph/ipygraph.html#EZGraphDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pralab_phys.ezgraph.ipygraph.EZGraphDisplay" title="Link to this definition"></a></dt>
