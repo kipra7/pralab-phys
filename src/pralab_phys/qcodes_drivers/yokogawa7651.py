@@ -53,10 +53,17 @@ class Yokogawa7651(VisaInstrument):
 			Returns:
 				The current output of the Yokogawa7651. (mA)
 		'''
-		self.auto_current: Parameter = self.add_parameter(
+		self.current: Parameter = self.add_parameter(
                 name="current",
                 parameter_class=Y7651AutoCurrent,
                 label="current",
+                unit="A",
+            )
+		
+		self.current_peak_amplitude: Parameter = self.add_parameter(
+                name="current_peak_amplitude",
+                parameter_class=Y7651AutoCurrent,
+                label="current peak amplitude",
                 unit="A",
             )
 
@@ -121,6 +128,12 @@ class Yokogawa7651(VisaInstrument):
 		self.write('O1E')
 	
 	def off(self):
+		self.write('O0E')
+
+	def output_on(self):
+		self.write('O1E')
+	
+	def output_off(self):
 		self.write('O0E')
 
 	def _get_output(self):
